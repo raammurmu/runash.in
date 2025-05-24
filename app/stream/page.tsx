@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { EnhancedStreamingStudio } from "@/components/streaming/enhanced-streaming-studio"
+import StreamingStudio from "@/components/streaming/streaming-studio"
 
 export const metadata: Metadata = {
   title: "AI Live Streaming Studio | RunAsh",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function StreamPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900">
-      <EnhancedStreamingStudio />
+      <StreamingStudio />
     </div>
   )
 }
