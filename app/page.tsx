@@ -33,7 +33,7 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section with Video Background */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative bg-black h-screen flex items-center justify-center overflow-hidden">
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
@@ -42,7 +42,7 @@ export default function Home() {
             </span>
           </div>
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 to--500 text-transparent bg-clip-text">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 to--500 text-transparent bg-clip-text">
             RunAsh AI Live Streaming Platform
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
@@ -52,22 +52,25 @@ export default function Home() {
             <Button
               size="lg"
               className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-yello-700"
+              onClick={() => router.push("/stream")}
             >
               Start Streaming <Play className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-950">
+            <Button size="lg" variant="outline" className="border-orange-500 text-orange-400 hover:bg-orange-950"
+              onClick={() => router.push("/demo")}
+              >
               Watch Demo <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-          <ArrowRight className="h-8 w-8 transform rotate-90 text-purple-400" />
+          <ArrowRight className="h-8 w-8 transform rotate-90 text-orange-400" />
         </div>
         </div>
       </section>
       
       {/* Hero Section with Video Background */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-20 flex items-center justify-center overflow-hidden">
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
@@ -306,10 +309,10 @@ export default function Home() {
             </h2>
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8">
               Select the perfect plan for your streaming needs with no hidden fees
-            </p> */}
+            </p> 
 
             {/* Currency Selector */}
-            <div className="flex justify-center mb-8">
+          {/* <div className="flex justify-center mb-8">
               <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700">
                 <button
                   onClick={() => setCurrency("USD")}
@@ -335,7 +338,7 @@ export default function Home() {
             </div>
     
 
-         {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <PricingCard
               title="Starter"
               price={formatPrice(19)}
@@ -401,6 +404,33 @@ export default function Home() {
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Select the perfect plan for your streaming needs with no hidden fees
             </p>
+             
+          {/* Currency Selector */}
+            <div className="flex justify-center mb-8">
+              <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={() => setCurrency("USD")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currency === "USD"
+                      ? "bg-orange-500 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-orange-500"
+                  }`}
+                >
+                  🇺🇸 USD
+                </button>
+                <button
+                  onClick={() => setCurrency("INR")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currency === "INR"
+                      ? "bg-orange-500 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-orange-500"
+                  }`}
+                >
+                  🇮🇳 INR
+                </button>
+              </div>
+            </div>
+    
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -468,7 +498,7 @@ export default function Home() {
             <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg shadow-orange-700/20">
               Start Your Free Trial <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-orange-700/20">
+            <Button size="lg" variant="outline" className="border-white text-orange-600 hover:bg-orange-700/20">
               Schedule a Demo
             </Button>
           </div>
@@ -562,10 +592,10 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/recipe-meal-planner"
+                    href="/recipe-planner"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Recipe Meal Planner
+                    Recipe Planner
                   </a>
                 </li>
                 <li>
