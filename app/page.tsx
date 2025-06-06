@@ -33,7 +33,7 @@ export default function Home() {
       <Navbar />
       
       {/* Hero Section with Video Background */}
-       { <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
+        <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
        {/* Hero Section with Video Background */}
-       { <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
+        <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
