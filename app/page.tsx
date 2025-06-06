@@ -31,7 +31,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
       <Navbar />
-          {/* Hero Section with Video Background */}
+      
+      {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
@@ -61,6 +62,7 @@ export default function Home() {
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
           <ArrowRight className="h-8 w-8 transform rotate-90 text-purple-400" />
+        </div>
         </div>
       </section>
       
