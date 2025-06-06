@@ -32,43 +32,6 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
       <Navbar />
       
-       {/* Hero Section with Video Background */}
-      {/* <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <VideoBackground />
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
-            <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-              Introducing 
-            </span>
-          </div>
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 to--500 text-transparent bg-clip-text">
-            RunAsh AI Live Streaming Platform
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
-            The next generation of AI-powered live streaming for creators, sellers, and businesses
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-400 hover:to-yello-700"
-              onClick={() => router.push("/stream")}
-            >
-              Start Streaming <Play className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-orange-500 text-orange-400 hover:bg-orange-700"
-              onClick={() => router.push("/demo")}
-              >
-              Watch Demo <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-        <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-          <ArrowRight className="h-8 w-8 transform rotate-90 text-orange-400" />
-        </div>
-        </div>
-        </section> */}
-      
       {/* Hero Section with Video Background */}
        { <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
@@ -99,9 +62,22 @@ export default function Home() {
             >
               Watch Demo <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+          </div>     
+         {/* Tech badges */}
+          <div className="mt-12 flex flex-wrap justify-center gap-3">
+            <TechBadge label="Real-time AI" />
+            <TechBadge label="4K Quality" />
+            <TechBadge label="Low Latency" />
+            <TechBadge label="Multi-platform" />
           </div>
-          </div>
-         </section>
+        </div>
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+          <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
+        </div>
+      </section>
+
+       {/* Hero Section with Video Background */}
+       { <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
@@ -130,9 +106,8 @@ export default function Home() {
             >
               Watch Demo <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-
-          {/* Tech badges */}
+          </div>     
+         {/* Tech badges */}
           <div className="mt-12 flex flex-wrap justify-center gap-3">
             <TechBadge label="Real-time AI" />
             <TechBadge label="4K Quality" />
