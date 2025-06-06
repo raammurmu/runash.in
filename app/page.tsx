@@ -259,31 +259,31 @@ export default function Home() {
           <ScrollArea className="w-full pb-8">
             <div className="flex space-x-6">
               <TestimonialCard
-                name="Alex Chen"
-                role="Gaming Streamer"
+                name="Sikander "
+                role="Seller Streamer"
                 image="/placeholder.svg?height=80&width=80"
                 quote="RunAsh AI has doubled my viewer engagement and made streaming so much easier. The AI enhancements make my stream look professional without expensive equipment."
               />
               <TestimonialCard
-                name="Sarah Johnson"
+                name="Nirali"
                 role="Fitness Instructor"
                 image="/placeholder.svg?height=80&width=80"
                 quote="The AI video enhancement makes my fitness streams look professional without expensive equipment. My subscribers have increased by 200% since switching to RunAsh."
               />
               <TestimonialCard
-                name="Michael Rodriguez"
+                name="Jassi"
                 role="Tech Educator"
                 image="/placeholder.svg?height=80&width=80"
                 quote="The audience analytics have helped me tailor my content to what my viewers actually want. The AI content suggestions are spot on and have helped me grow my channel."
               />
               <TestimonialCard
-                name="Emma Wilson"
-                role="Music Artist"
+                name="Vijay"
+                role="Seller Streamer"
                 image="/placeholder.svg?height=80&width=80"
-                quote="As a musician, audio quality is everything. RunAsh's AI audio enhancement has made my live performances sound studio-quality. My fans love it!"
+                quote="As a seller, audio quality is everything. RunAsh's AI audio enhancement has made my live demonstration sound studio-quality. My fans love it!"
               />
               <TestimonialCard
-                name="David Park"
+                name="Sujata"
                 role="Cooking Channel Host"
                 image="/placeholder.svg?height=80&width=80"
                 quote="The multi-camera AI switching is a game-changer for my cooking streams. It's like having a professional director for my channel. Absolutely worth every penny."
@@ -504,38 +504,38 @@ export default function Home() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">Company</h3>
+              <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">Platform</h3>
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/about"
+                    href="/ai"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    About
+                    AI
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/careers"
+                    href="/chat"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Careers
+                    RunAshChat
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/press"
+                    href="/store"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Press
+                    LiveStore
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/contact"
+                    href="/seller"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Contact
+                    Become a seller 
                   </a>
                 </li>
               </ul>
@@ -554,26 +554,26 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/pricing"
+                    href="/stream"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Pricing
+                    RunAshStudio
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/integrations"
+                    href="/recipe-meal-planner"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Integrations
+                    Recipe Meal Planner
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/roadmap"
+                    href="/runash-pay"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Roadmap
+                    RunAshPay
                   </a>
                 </li>
               </ul>
@@ -600,18 +600,18 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/blog"
+                    href="/learn"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Blog
+                    Learn 
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/support"
+                    href="/community"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Support
+                    Community 
                   </a>
                 </li>
               </ul>
@@ -626,7 +626,7 @@ export default function Home() {
                 <h4 className="font-medium text-sm mb-3 text-gray-700 dark:text-gray-300">Follow us</h4>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://twitter.com"
+                    href="https://twitter.com/runash.ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -646,7 +646,7 @@ export default function Home() {
                     <span>Twitter</span>
                   </a>
                   <a
-                    href="https://discord.com"
+                    href="https://discord.com/runash.ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -666,7 +666,7 @@ export default function Home() {
                     <span>Discord</span>
                   </a>
                   <a
-                    href="https://youtube.com"
+                    href="https://youtube.com/runash.ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -687,7 +687,7 @@ export default function Home() {
                     <span>YouTube</span>
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href="https://instagram.com/runash.ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -722,7 +722,7 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/"
+                      href="/home"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
                       Home
