@@ -159,9 +159,9 @@ export default function CareersPage() {
                     <SelectContent className="bg-white/90 dark:bg-gray-900/90 border-orange-200 dark:border-orange-800/30">
                       <SelectItem value="all">All Locations</SelectItem>
                       <SelectItem value="sf">San Francisco</SelectItem>
-                      <SelectItem value="nyc">New York</SelectItem>
-                      <SelectItem value="london">London</SelectItem>
-                      <SelectItem value="remote">Remote</SelectItem>
+                      <SelectItem value="remot">Remote</SelectItem>
+                      <SelectItem value="bharat">Bharat (India)</SelectItem>
+                      <SelectItem value="ranchi">Ranchi</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -193,7 +193,7 @@ export default function CareersPage() {
                   <JobCard
                     title="Senior AI Engineer"
                     department="Engineering"
-                    location="San Francisco, CA"
+                    location="Remote"
                     type="Full-time"
                     featured={true}
                   />
@@ -207,14 +207,14 @@ export default function CareersPage() {
                   <JobCard
                     title="UX/UI Designer"
                     department="Design"
-                    location="London, UK"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
                   <JobCard
                     title="Growth Marketing Manager"
                     department="Marketing"
-                    location="New York, NY"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
@@ -228,7 +228,7 @@ export default function CareersPage() {
                   <JobCard
                     title="DevOps Engineer"
                     department="Engineering"
-                    location="San Francisco, CA"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
@@ -247,7 +247,7 @@ export default function CareersPage() {
                   <JobCard
                     title="Senior AI Engineer"
                     department="Engineering"
-                    location="San Francisco, CA"
+                    location="Remote"
                     type="Full-time"
                     featured={true}
                   />
@@ -261,7 +261,7 @@ export default function CareersPage() {
                   <JobCard
                     title="DevOps Engineer"
                     department="Engineering"
-                    location="San Francisco, CA"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
@@ -285,7 +285,7 @@ export default function CareersPage() {
                   <JobCard
                     title="UX/UI Designer"
                     department="Design"
-                    location="London, UK"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
@@ -297,7 +297,7 @@ export default function CareersPage() {
                   <JobCard
                     title="Growth Marketing Manager"
                     department="Marketing"
-                    location="New York, NY"
+                    location="Remote"
                     type="Full-time"
                     featured={false}
                   />
