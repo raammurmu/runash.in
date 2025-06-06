@@ -380,6 +380,7 @@ export default function AboutPage() {
                 size="lg"
                 variant="outline"
                 className="border-orange-500 text-orange-600 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                onClick={() => router.push("/schedule")}
               >
                 Schedule a Demo
               </Button>
