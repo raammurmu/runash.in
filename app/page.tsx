@@ -79,10 +79,10 @@ export default function Home() {
       <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <StatCounter value={1000+} label="Organic Products" />
-            <StatCounter value={1000+} label="Organic Farm" suffix="+" />
+            <StatCounter value={150} label="Organic Products" />
+            <StatCounter value={1000} label="Organic Farm" suffix="+" />
             <StatCounter value={99.9} label="Sustainable" suffix="%" />
-            <StatCounter value={100+} label="Organic Recipe" suffix="+" />
+            <StatCounter value={100} label="Organic Recipe" suffix="+" />
           </div>
         </div>
       </section> 
