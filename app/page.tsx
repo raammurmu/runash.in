@@ -65,27 +65,27 @@ export default function Home() {
           </div>     
          {/* Tech badges */}
           <div className="mt-12 flex flex-wrap justify-center gap-3">
-            <TechBadge label="Buy" />
-            <TechBadge label="Sell" />
-            <TechBadge label="Watch" />
-            <TechBadge label="Chat" />
+            <TechBadge label="Live Sales" />
+            <TechBadge label="Live Shopping " />
+            <TechBadge label="Live-on-demand" />
+            <TechBadge label="Live Chat" />
           </div>
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
           <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
         </div>
       </section>
-      {/* Stats Section */}
-  {/* <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
+     {/* Stats Section */}
+      <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <StatCounter value={1000+} label="Organic Products" />
-            <StatCounter value={1000+} label="Organic Farm" suffix="+" />
-            <StatCounter value={99.9} label="Sustainability" suffix="%" />
-            <StatCounter value={100+} label="Organic Recipe s" suffix="+" />
+            <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
+            <StatCounter value={1000} label="Organic Farms" suffix="+" />
+            <StatCounter value={99.9} label="Sustainable" suffix="%" />
+            <StatCounter value={100} label="Organic Recipe" suffix="+" />
           </div>
         </div>
-      </section> */}
+      </section> 
 
        {/* Hero Section with Video Background */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
@@ -327,6 +327,31 @@ export default function Home() {
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Select the perfect plan for your streaming needs with no hidden fees
             </p>
+            {/* Currency Selector */}
+            <div className="flex justify-center mt-4 mb-8">
+              <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={() => setCurrency("USD")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currency === "USD"
+                      ? "bg-orange-500 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-orange-500"
+                  }`}
+                >
+                 🇮🇳 INR
+                </button>
+                <button
+                  onClick={() => setCurrency("INR")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currency === "INR"
+                      ? "bg-orange-500 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-orange-500"
+                  }`}
+                >
+                  🇺🇸 USD
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -342,6 +367,7 @@ export default function Home() {
               ]}
               buttonText="Get Started"
               popular={false}
+              onButtonClick={() => router.push("/checkout?plan=starter")}
             />
             <PricingCard
               title="Professional"
@@ -357,6 +383,7 @@ export default function Home() {
               ]}
               buttonText="Choose Pro"
               popular={true}
+              onButtonClick={() => router.push("/checkout?plan=professional")}
             />
             <PricingCard
               title="Enterprise"
@@ -374,6 +401,7 @@ export default function Home() {
               ]}
               buttonText="Contact Sales"
               popular={false}
+             onButtonClick={() => router.push("/checkout?plan=enterprise")}
             />
           </div>
         </div>
@@ -469,18 +497,18 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/features"
-                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="/stream"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     RunAshStudio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/sustainable-traker"
+                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                  >
+                    Sustainable Traker 
                   </a>
                 </li>
                 <li>
