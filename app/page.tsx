@@ -65,9 +65,9 @@ export default function Home() {
           </div>     
          {/* Tech badges */}
           <div className="mt-12 flex flex-wrap justify-center gap-3">
-            <TechBadge label="Live Buy" />
-            <TechBadge label="Live Sell" />
-            <TechBadge label="Live Watch" />
+            <TechBadge label="Live Sales" />
+            <TechBadge label="Live Shopping " />
+            <TechBadge label="Live-on-demand" />
             <TechBadge label="Live Chat" />
           </div>
         </div>
@@ -79,8 +79,8 @@ export default function Home() {
       <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <StatCounter value={150} label="Organic Products" />
-            <StatCounter value={1000} label="Organic Farm" suffix="+" />
+            <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
+            <StatCounter value={1000} label="Organic Farms" suffix="+" />
             <StatCounter value={99.9} label="Sustainable" suffix="%" />
             <StatCounter value={100} label="Organic Recipe" suffix="+" />
           </div>
@@ -357,7 +357,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <PricingCard
               title="Starter"
-              price="$19"
+              price="{formatPrice(19)}"
               features={[
                 "720p AI Enhancement",
                 "Basic Chat Moderation",
@@ -371,7 +371,7 @@ export default function Home() {
             />
             <PricingCard
               title="Professional"
-              price="$49"
+              price="{formatPrice(49)}"
               features={[
                 "1080p AI Enhancement",
                 "Advanced Chat Moderation",
@@ -387,7 +387,7 @@ export default function Home() {
             />
             <PricingCard
               title="Enterprise"
-              price="$99"
+              price="{formatPrice(99)}"
               features={[
                 "4K AI Enhancement",
                 "Premium Chat Moderation",
@@ -497,18 +497,18 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/features"
-                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="/stream"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     RunAshStudio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/sustainable-traker"
+                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                  >
+                    Sustainable Traker 
                   </a>
                 </li>
                 <li>
