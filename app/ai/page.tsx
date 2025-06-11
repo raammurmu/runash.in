@@ -28,7 +28,6 @@ import {
   ImagePlay,
   ImagePlus,
   Drama,
-  ALargSmall,
   BarChartIcon as ChartBar,
 } from "lucide-react"
 
@@ -260,7 +259,7 @@ export default function AIPage() {
 
           {/* Research Areas */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Drama className="h-6 w-6 text-white" />
               </div>
@@ -269,7 +268,7 @@ export default function AIPage() {
                 Real-time analysis of live stream for action detection 
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Video className="h-6 w-6 text-white" />
               </div>
@@ -279,7 +278,7 @@ export default function AIPage() {
                 
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <ImagePlus className="h-6 w-6 text-white" />
               </div>
@@ -288,7 +287,7 @@ export default function AIPage() {
                 Accurate detection and classification of objects within videos 
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Film className="h-6 w-6 text-white" />
               </div>
@@ -297,7 +296,7 @@ export default function AIPage() {
                 Video-Text-to-Text model take in a video chat and text prompt and output text.These model are call video language models.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Video className="h-6 w-6 text-white" />
               </div>
@@ -306,7 +305,7 @@ export default function AIPage() {
                 This feature allows to analyze live streams and extract relevant text information in real-time.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Video className="h-6 w-6 text-white" />
               </div>
@@ -315,7 +314,7 @@ export default function AIPage() {
                 This feature enables to generate live streams from text inputs, allowing for automated content creation.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <ImagePlay className="h-6 w-6 text-white" />
               </div>
@@ -324,16 +323,16 @@ export default function AIPage() {
                 This feature enables you to generate live streams from image inputs, allowing for automated content creation.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
-                <ALargeSmall className="h-6 w-6 text-white" />
+                <Nfc className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Translation</h3>
               <p className="text-gray-700 dark:text-gray-300">
                  Our model supports real-time translation capabilities, allowing you to reach a global audience.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Speech className="h-6 w-6 text-white" />
               </div>
@@ -342,7 +341,7 @@ export default function AIPage() {
                 Our model supports TTS capabilities, allowing you to generate spoken language from text inputs in real-time.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-orange-100 dark:border-orange-900/20">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow border border-orange-100 dark:border-orange-900/20">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4 inline-block">
                 <Speech className="h-6 w-6 text-white" />
               </div>
