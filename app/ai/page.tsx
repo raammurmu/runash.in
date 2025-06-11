@@ -246,7 +246,7 @@ export default function AIPage() {
         <div className="container px-4 mx-auto">
           <div className="flex flex-col items-center text-center mb-16">
             <div className="p-3 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 mb-4">
-              <CPU className="h-6 w-6 text-white" />
+              <Cpu className="h-6 w-6 text-white" />
             </div>
             <h2 className="text-4xl font-bold bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text mb-4">
               Custom RunAsh AI Model 
