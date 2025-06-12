@@ -41,7 +41,7 @@ export default function Home() {
               Introducing 
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
             RunAsh AI Live Streaming Platform 
           </h1>
           <p className=" text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
@@ -434,9 +434,9 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 mb-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">RunAsh AI</h3>
+              <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">RunAsh</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                The most advanced AI live streaming platform for creators, sellers, and businesses.
+                The most advanced AI-powered live streaming platform for creators, sellers, and businesses.
               </p>
               <div className="flex items-center gap-2 mb-4">
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -479,7 +479,7 @@ export default function Home() {
                     href="/"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    LiveStore 
+                    LiveStore
                   </a>
                 </li>
                 <li>
@@ -667,7 +667,7 @@ export default function Home() {
 
           {/* Sitemap */}
           <div className="border-t border-gray-200 dark:border-gray-800 pt-8 mt-8">
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">Quick Link</h3>
+            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white"></h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               <div>
                 <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Company</h4>
@@ -772,10 +772,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/influencer"
+                      href="/start-up"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Influencer 
+                     Start-up 
                     </a>
 
                   </li>
@@ -837,7 +837,7 @@ export default function Home() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">More</h4>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Social</h4>
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
