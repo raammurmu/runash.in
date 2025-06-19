@@ -3,16 +3,23 @@
 import { Button } from "@/components/ui/button"
 import { Check } from "lucide-react"
 
+    
 interface PricingCardProps {
   title: string
   price: string
+  yearlyPrice: string
+  description: string
   features: string[]
   buttonText: string
   popular?: boolen
+  isYearly?: boolean
   onButtonClick?: () => void
 }
 
-export default function PricingCard({ title, price, features, buttonText, onButtonClick, popular = false }: PricingCardProps) {
+export default function PricingCard({ title, price, yearlyPrice, description, features, buttonText, onButtonClick, isYearly, popular = false }: PricingCardProps) {
+  const currentPrice = isYearly ? yearlyPrice : price
+  const savings = isYearly && title !== "Starter" ? "Save 20%" : null
+
   return (
     <div
       className={`
@@ -47,10 +54,6 @@ export default function PricingCard({ title, price, features, buttonText, onButt
           </li>
         ))}
       </ul>
-
-       <Button className="w-full" variant={popular ? "default" : "outline"} onClick={onButtonClick}>
-        {buttonText}
-      </Button> 
       
        <Button
         className={
