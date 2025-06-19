@@ -8,7 +8,7 @@ interface PricingCardProps {
   price: string
   features: string[]
   buttonText: string
-  popular?: boolean
+  popular?: boolen
   onButtonClick?: () => void
 }
 
@@ -48,9 +48,9 @@ export default function PricingCard({ title, price, features, buttonText, onButt
         ))}
       </ul>
 
-      {/*  <Button className="w-full" variant={popular ? "default" : "outline"} onClick={onButtonClick}>
+       <Button className="w-full" variant={popular ? "default" : "outline"} onClick={onButtonClick}>
         {buttonText}
-      </Button> */}
+      </Button> 
       
        <Button
         className={
@@ -66,7 +66,7 @@ export default function PricingCard({ title, price, features, buttonText, onButt
 }
 
 {/* "use client"
-import { Button } from "@/components/ui/button" */}
+import { Button } from "@/components/ui/button" 
 
 interface PricingCardProps {
   title: string
@@ -101,4 +101,4 @@ export default function PricingCard({
       </Button>
     </div>
   )
-} 
+}  */}
