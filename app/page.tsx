@@ -672,9 +672,9 @@ export default function Home() {
 
           {/* Sitemap */}
           <div className="border-t border-gray-200 dark:border-gray-800 pt-8 mt-8">
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">RunAsh AI</h3>
+            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white"></h3>
              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Streaming Innovation Forward: Where AI Meets Live"
+                
               </p>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               <div>
@@ -772,10 +772,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/Sustainable Traker"
+                      href="/sustainable Traker"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      
+                     Sustainable Traker
                     </a>
                   </li>
                   <li>
@@ -849,18 +849,18 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/sellers"
+                      href="/buyer"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Sellers 
+                     Become a buyer 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/buyers"
+                      href="/farms"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Buyers
+                     Become a farms
                     </a>
                   </li>
                   <li>
@@ -868,7 +868,7 @@ export default function Home() {
                       href="/creater"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Creaters 
+                     Become a creater
                     </a>
                   </li>
                   <li>
