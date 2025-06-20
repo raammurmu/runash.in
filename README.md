@@ -27,8 +27,6 @@ RunAsh AI is a live streaming platform that enables users to broadcast high-qual
 
 * **Node.js**: Our platform is built using Node.js, a JavaScript runtime environment.
 * **MongoDB**: Our platform uses MongoDB, a NoSQL database, to store and manage data.
-* **Prisma**: Our platform uses Prisma, a cloud-native database, to provide real-time data synchronization and scalability.
-* **Drizzle**: Our platform uses Drizzle, a decentralized database, to provide high security and data integrity.
 * **Supabase** Our platform uses Supabase.Supabase is an open source Firebase alternative.
 Start our project with a Postgres database, Authentication, instant APIs, Edge Functions, Realtime subscriptions, Storage, and Vector embeddings.
 * **Neon** Our platform uses Neon,a serverless postgres database.
