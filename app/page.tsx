@@ -45,7 +45,7 @@ export default function Home() {
             RunAsh AI Live Streaming Platform 
           </h1>
           <p className=" text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-            The next generation of AI live streaming platform where the sellers build own live streaming 
+            The next generation of AI live streaming selling platform where the sellers build own live streaming 
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -84,9 +84,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
-            <StatCounter value={1000} label="Organic Farms" suffix="+" />
+            <StatCounter value={1000} label="100% Organic Certified Farms" suffix="+" />
             <StatCounter value={99.9} label="Sustainable" suffix="%" />
-            <StatCounter value={100} label="Organic Recipe" suffix="+" />
+            <StatCounter value={100} label="100% Organic Certified Recipe" suffix="+" />
           </div>
         </div>
       </section> 
@@ -291,13 +291,13 @@ export default function Home() {
               />
               <TestimonialCard
                 name="Nirali"
-                role="Fitness Instructor"
+                role="Seller Streamer"
                 image="/placeholder.svg?height=80&width=80"
-                quote="The AI video enhancement makes my fitness streams look professional without expensive equipment. My subscribers have increased by 200% since switching to RunAsh."
+                quote="The AI video enhancement makes my organic products streams look professional without expensive equipment. My subscribers have increased by 200% since switching to RunAsh."
               />
               <TestimonialCard
                 name="Jassi"
-                role="Tech Educator"
+                role="Seller Streamer"
                 image="/placeholder.svg?height=80&width=80"
                 quote="The audience analytics have helped me tailor my content to what my viewers actually want. The AI content suggestions are spot on and have helped me grow my channel."
               />
@@ -855,7 +855,7 @@ export default function Home() {
                       href="/buyer"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Buyer 
+                     Become a buyer 
                     </a>
                   </li>
                   <li>
@@ -871,7 +871,7 @@ export default function Home() {
                       href="/creater"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Creaters
+                     Creater
                     </a>
                   </li>
                   <li>
