@@ -16,6 +16,7 @@ import { LanguageSelector } from "@/components/language-selector"
 import { CountrySelector } from "@/components/country-selector"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { LiveStreams } from "@/components/live-streams"
 
 export default function Home() {
   const router = useRouter()
@@ -248,6 +249,7 @@ export default function Home() {
             <TechBadge label="Low Latency" />
             <TechBadge label="Multi-platform" />
           </div>
+          <LiveStreams />
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
           <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
