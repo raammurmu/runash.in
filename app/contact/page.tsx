@@ -167,6 +167,14 @@ export default function ContactPage() {
               image="/placeholder.svg?height=200&width=400"
               hours="Mon-Fri: 9am-5pm JST"
             />
+            <OfficeLocation
+              city="San Francisco (Remote)"
+              address="Stripe Atlas, Dalaware San Francisco, CA 19706"
+              phone="+1 (555) "
+              email="admin@runash.in"
+              image="/placeholder.svg?height=200&width=400"
+              hours="Mon-Fri: 9am-5pm JST"
+            />
           </div>
 
           {/* World Map */}
