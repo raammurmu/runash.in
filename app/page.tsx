@@ -488,7 +488,7 @@ export default function Home() {
                     href="/"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                   RunAshLive
+                   Live Shopping 
                   </a>
                 </li>
                 <li>
@@ -897,6 +897,112 @@ export default function Home() {
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
                       Influencers 
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">AI Research</h4>
+                <ul className="space-y-1 text-sm">
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     RunAsh LLM
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Video Classificatio 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Computer Vision 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                      NLP
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Multi-Model
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                       
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Financial</h4>
+                <ul className="space-y-1 text-sm">
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Credit 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Grant 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Free
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                      Sponsor
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                      e₹upee
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                      RunAshPay
                     </a>
                   </li>
                 </ul>
