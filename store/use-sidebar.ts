@@ -1,15 +1,27 @@
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
-interface SidebarStore {
+interface SidebarState {
   isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
+  isMobile: boolean
   toggle: () => void
+  open: () => void
+  close: () => void
+  setMobile: (mobile: boolean) => void
 }
 
-export const useSidebar = create<SidebarStore>((set) => ({
-  isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
-  toggle: () => set((state) => ({ isOpen: !state.isOpen })),
-}))
+export const useSidebar = create<SidebarState>()(
+  persist(
+    (set) => ({
+      isOpen: true,
+      isMobile: false,
+      toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+      open: () => set({ isOpen: true }),
+      close: () => set({ isOpen: false }),
+      setMobile: (mobile: boolean) => set({ isMobile: mobile }),
+    }),
+    {
+      name: "sidebar-storage",
+    },
+  ),
+)
