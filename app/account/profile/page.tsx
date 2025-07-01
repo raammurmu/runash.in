@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,25 +8,72 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Camera, Save, Mail, Globe, MapPin, Calendar } from "lucide-react"
+import { Camera, Save, Mail, Globe, MapPin, Calendar, Loader2 } from "lucide-react"
+import { useUserProfile } from "@/hooks/use-user-data"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ProfilePage() {
+  const { user, loading, error, updateUser } = useUserProfile()
+  const { toast } = useToast()
   const [isEditing, setIsEditing] = useState(false)
-  const [profile, setProfile] = useState({
-    name: "Alex Johnson",
-    email: "alex@runash.ai",
-    username: "alexj_streams",
-    bio: "Tech enthusiast and live streamer passionate about AI and gaming. Building the future of interactive content.",
-    website: "https://alexjohnson.dev",
-    location: "San Francisco, CA",
-    joinDate: "January 2023",
-    avatar: "/placeholder.svg?height=100&width=100",
+  const [isSaving, setIsSaving] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    bio: "",
+    website: "",
+    location: "",
   })
 
-  const handleSave = () => {
-    setIsEditing(false)
-    // Here you would typically save to your backend
-    console.log("Profile saved:", profile)
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        username: user.username || "",
+        bio: user.bio || "",
+        website: user.website || "",
+        location: user.location || "",
+      })
+    }
+  }, [user])
+
+  const handleSave = async () => {
+    try {
+      setIsSaving(true)
+      await updateUser(formData)
+      setIsEditing(false)
+      toast({
+        title: "Profile updated",
+        description: "Your profile has been successfully updated.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update profile. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  if (error || !user) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold">Error loading profile</h2>
+          <p className="text-muted-foreground">{error || "User not found"}</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -38,9 +85,15 @@ export default function ProfilePage() {
         </div>
         <Button
           onClick={() => (isEditing ? handleSave() : setIsEditing(true))}
+          disabled={isSaving}
           className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600"
         >
-          {isEditing ? (
+          {isSaving ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Saving...
+            </>
+          ) : isEditing ? (
             <>
               <Save className="mr-2 h-4 w-4" />
               Save Changes
@@ -57,7 +110,7 @@ export default function ProfilePage() {
             <CardHeader className="text-center">
               <div className="relative mx-auto">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={profile.avatar || "/placeholder.svg"} alt={profile.name} />
+                  <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
                   <AvatarFallback className="bg-gradient-to-br from-orange-400 to-orange-600 text-white text-xl">
                     AJ
                   </AvatarFallback>
@@ -73,8 +126,8 @@ export default function ProfilePage() {
                 )}
               </div>
               <div className="space-y-1">
-                <h3 className="font-semibold">{profile.name}</h3>
-                <p className="text-sm text-muted-foreground">@{profile.username}</p>
+                <h3 className="font-semibold">{user.name}</h3>
+                <p className="text-sm text-muted-foreground">@{user.username}</p>
                 <Badge variant="secondary" className="bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700">
                   Creator Plan
                 </Badge>
@@ -83,21 +136,21 @@ export default function ProfilePage() {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                {profile.email}
+                {user.email}
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                {profile.location}
+                {user.location}
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                Joined {profile.joinDate}
+                Joined {user.joinDate}
               </div>
-              {profile.website && (
+              {user.website && (
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Globe className="h-4 w-4" />
-                  <a href={profile.website} className="text-orange-600 hover:underline">
-                    {profile.website}
+                  <a href={user.website} className="text-orange-600 hover:underline">
+                    {user.website}
                   </a>
                 </div>
               )}
@@ -117,8 +170,8 @@ export default function ProfilePage() {
                   <Label htmlFor="name">Full Name</Label>
                   <Input
                     id="name"
-                    value={profile.name}
-                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     disabled={!isEditing}
                   />
                 </div>
@@ -126,29 +179,23 @@ export default function ProfilePage() {
                   <Label htmlFor="username">Username</Label>
                   <Input
                     id="username"
-                    value={profile.username}
-                    onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+                    value={formData.username}
+                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                     disabled={!isEditing}
                   />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={profile.email}
-                  onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                  disabled={!isEditing}
-                />
+                <Input id="email" type="email" value={user.email} disabled={true} />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="website">Website</Label>
                   <Input
                     id="website"
-                    value={profile.website}
-                    onChange={(e) => setProfile({ ...profile, website: e.target.value })}
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     disabled={!isEditing}
                     placeholder="https://yourwebsite.com"
                   />
@@ -157,8 +204,8 @@ export default function ProfilePage() {
                   <Label htmlFor="location">Location</Label>
                   <Input
                     id="location"
-                    value={profile.location}
-                    onChange={(e) => setProfile({ ...profile, location: e.target.value })}
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     disabled={!isEditing}
                     placeholder="City, Country"
                   />
@@ -168,8 +215,8 @@ export default function ProfilePage() {
                 <Label htmlFor="bio">Bio</Label>
                 <Textarea
                   id="bio"
-                  value={profile.bio}
-                  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                  value={formData.bio}
+                  onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                   disabled={!isEditing}
                   placeholder="Tell us about yourself..."
                   className="min-h-[100px]"

@@ -17,42 +17,52 @@ import {
   Settings,
   Volume2,
   VolumeX,
+  Loader2,
 } from "lucide-react"
+import { useUserNotifications } from "@/hooks/use-user-data"
+import { useToast } from "@/hooks/use-toast"
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState({
-    email: {
-      streamStart: true,
-      newFollower: true,
-      donations: true,
-      weeklyReport: true,
-      security: true,
-      marketing: false,
-    },
-    push: {
-      streamStart: true,
-      newFollower: false,
-      donations: true,
-      chatMentions: true,
-      security: true,
-    },
-    inApp: {
-      streamStart: true,
-      newFollower: true,
-      donations: true,
-      chatMentions: true,
-      moderatorActions: true,
-    },
-  })
+  const { notifications, loading, error, updateNotifications } = useUserNotifications()
+  const { toast } = useToast()
+  const [isSaving, setIsSaving] = useState(false)
 
-  const updateNotification = (type: keyof typeof notifications, key: string, value: boolean) => {
-    setNotifications((prev) => ({
-      ...prev,
-      [type]: {
-        ...prev[type],
-        [key]: value,
-      },
-    }))
+  const handleNotificationChange = async (key: string, value: boolean) => {
+    try {
+      setIsSaving(true)
+      await updateNotifications({ [key]: value })
+      toast({
+        title: "Notification setting updated",
+        description: "Your notification preference has been saved.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update notification setting. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  if (error || !notifications) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold">Error loading notifications</h2>
+          <p className="text-muted-foreground">{error || "Notification settings not found"}</p>
+        </div>
+      </div>
+    )
   }
 
   const notificationCategories = [
@@ -65,9 +75,9 @@ export default function NotificationsPage() {
           key: "streamStart",
           label: "Stream Started",
           description: "When your scheduled stream goes live",
-          email: notifications.email.streamStart,
-          push: notifications.push.streamStart,
-          inApp: notifications.inApp.streamStart,
+          email: true,
+          push: true,
+          inApp: true,
         },
       ],
     },
@@ -80,17 +90,17 @@ export default function NotificationsPage() {
           key: "newFollower",
           label: "New Followers",
           description: "When someone follows your channel",
-          email: notifications.email.newFollower,
-          push: notifications.push.newFollower,
-          inApp: notifications.inApp.newFollower,
+          email: true,
+          push: false,
+          inApp: true,
         },
         {
           key: "chatMentions",
           label: "Chat Mentions",
           description: "When someone mentions you in chat",
           email: false,
-          push: notifications.push.chatMentions,
-          inApp: notifications.inApp.chatMentions,
+          push: true,
+          inApp: true,
         },
       ],
     },
@@ -103,9 +113,9 @@ export default function NotificationsPage() {
           key: "donations",
           label: "Donations & Tips",
           description: "When you receive donations or tips",
-          email: notifications.email.donations,
-          push: notifications.push.donations,
-          inApp: notifications.inApp.donations,
+          email: true,
+          push: true,
+          inApp: true,
         },
       ],
     },
@@ -118,7 +128,7 @@ export default function NotificationsPage() {
           key: "weeklyReport",
           label: "Weekly Reports",
           description: "Weekly performance and analytics summary",
-          email: notifications.email.weeklyReport,
+          email: true,
           push: false,
           inApp: false,
         },
@@ -133,8 +143,8 @@ export default function NotificationsPage() {
           key: "security",
           label: "Security Alerts",
           description: "Login attempts and security notifications",
-          email: notifications.email.security,
-          push: notifications.push.security,
+          email: true,
+          push: true,
           inApp: true,
         },
       ],
@@ -202,24 +212,27 @@ export default function NotificationsPage() {
                         <div className="flex justify-center">
                           {setting.email !== false && (
                             <Switch
-                              checked={setting.email}
-                              onCheckedChange={(checked) => updateNotification("email", setting.key, checked)}
+                              checked={notifications[`email_${setting.key}` as keyof typeof notifications] as boolean}
+                              onCheckedChange={(checked) => handleNotificationChange(`email_${setting.key}`, checked)}
+                              disabled={isSaving}
                             />
                           )}
                         </div>
                         <div className="flex justify-center">
                           {setting.push !== false && (
                             <Switch
-                              checked={setting.push}
-                              onCheckedChange={(checked) => updateNotification("push", setting.key, checked)}
+                              checked={notifications[`push_${setting.key}` as keyof typeof notifications] as boolean}
+                              onCheckedChange={(checked) => handleNotificationChange(`push_${setting.key}`, checked)}
+                              disabled={isSaving}
                             />
                           )}
                         </div>
                         <div className="flex justify-center">
                           {setting.inApp !== false && (
                             <Switch
-                              checked={setting.inApp}
-                              onCheckedChange={(checked) => updateNotification("inApp", setting.key, checked)}
+                              checked={notifications[`inApp_${setting.key}` as keyof typeof notifications] as boolean}
+                              onCheckedChange={(checked) => handleNotificationChange(`inApp_${setting.key}`, checked)}
+                              disabled={isSaving}
                             />
                           )}
                         </div>
@@ -246,8 +259,9 @@ export default function NotificationsPage() {
                   </div>
                 </div>
                 <Switch
-                  checked={notifications.email.marketing}
-                  onCheckedChange={(checked) => updateNotification("email", "marketing", checked)}
+                  checked={notifications.email_marketing as boolean}
+                  onCheckedChange={(checked) => handleNotificationChange("email_marketing", checked)}
+                  disabled={isSaving}
                 />
               </div>
               <Separator />

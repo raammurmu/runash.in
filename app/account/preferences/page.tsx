@@ -8,10 +8,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import { Palette, Globe, Clock, Monitor, Moon, Sun, Languages, Accessibility, Zap, Eye, Volume2 } from "lucide-react"
+import {
+  Palette,
+  Globe,
+  Clock,
+  Monitor,
+  Moon,
+  Sun,
+  Languages,
+  Accessibility,
+  Zap,
+  Eye,
+  Volume2,
+  Loader2,
+} from "lucide-react"
+import { useUserPreferences } from "@/hooks/use-user-data"
+import { useToast } from "@/hooks/use-toast"
 
 export default function PreferencesPage() {
-  const [theme, setTheme] = useState("system")
+  const { preferences, loading, error, updatePreferences } = useUserPreferences()
+  const { toast } = useToast()
+  const [isSaving, setIsSaving] = useState(false)
   const [language, setLanguage] = useState("en")
   const [timezone, setTimezone] = useState("America/Los_Angeles")
   const [autoSave, setAutoSave] = useState(true)
@@ -43,6 +60,46 @@ export default function PreferencesPage() {
     { value: "Asia/Tokyo", label: "Japan Standard Time (JST)" },
   ]
 
+  const currentTheme = preferences?.theme
+
+  const handlePreferenceChange = async (key: string, value: any) => {
+    try {
+      setIsSaving(true)
+      await updatePreferences({ [key]: value })
+      toast({
+        title: "Preference updated",
+        description: "Your preference has been saved.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update preference. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  if (error || !preferences) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold">Error loading preferences</h2>
+          <p className="text-muted-foreground">{error || "Preferences not found"}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="flex items-center justify-between">
@@ -72,16 +129,16 @@ export default function PreferencesPage() {
                   {themes.map((themeOption) => (
                     <button
                       key={themeOption.value}
-                      onClick={() => setTheme(themeOption.value)}
+                      onClick={() => handlePreferenceChange("theme", themeOption.value)}
                       className={`flex flex-col items-center gap-2 p-3 rounded-lg border transition-colors ${
-                        theme === themeOption.value
+                        currentTheme === themeOption.value
                           ? "border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100"
                           : "border-border hover:bg-muted/50"
                       }`}
                     >
                       <themeOption.icon className="h-5 w-5" />
                       <span className="text-sm font-medium">{themeOption.label}</span>
-                      {theme === themeOption.value && (
+                      {currentTheme === themeOption.value && (
                         <Badge className="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs">
                           Active
                         </Badge>

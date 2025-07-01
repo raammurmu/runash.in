@@ -8,40 +8,77 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Shield, Key, Smartphone, Eye, EyeOff, AlertTriangle, CheckCircle, Clock, MapPin } from "lucide-react"
+import { Shield, Key, Smartphone, Eye, EyeOff, AlertTriangle, CheckCircle, Clock, MapPin, Loader2 } from "lucide-react"
+import { useUserSecurity, useUserSessions } from "@/hooks/use-user-data"
+import { useToast } from "@/hooks/use-toast"
 
 export default function SecurityPage() {
+  const { security, loading: securityLoading, error: securityError, updateSecurity } = useUserSecurity()
+  const {
+    sessions,
+    loading: sessionsLoading,
+    error: sessionsError,
+    revokeSession,
+    revokeAllSessions,
+  } = useUserSessions()
+  const { toast } = useToast()
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
-  const [twoFactorEnabled, setTwoFactorEnabled] = useState(true)
-  const [loginNotifications, setLoginNotifications] = useState(true)
+  const [isSaving, setIsSaving] = useState(false)
 
-  const sessions = [
-    {
-      id: 1,
-      device: "MacBook Pro",
-      location: "San Francisco, CA",
-      ip: "192.168.1.1",
-      lastActive: "Active now",
-      current: true,
-    },
-    {
-      id: 2,
-      device: "iPhone 15 Pro",
-      location: "San Francisco, CA",
-      ip: "192.168.1.2",
-      lastActive: "2 hours ago",
-      current: false,
-    },
-    {
-      id: 3,
-      device: "Chrome on Windows",
-      location: "New York, NY",
-      ip: "203.0.113.1",
-      lastActive: "3 days ago",
-      current: false,
-    },
-  ]
+  const handleSecurityChange = async (key: string, value: boolean) => {
+    try {
+      setIsSaving(true)
+      await updateSecurity({ [key]: value })
+      toast({
+        title: "Security setting updated",
+        description: "Your security preference has been saved.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update security setting. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleRevokeSession = async (sessionId: string) => {
+    try {
+      await revokeSession(sessionId)
+      toast({
+        title: "Session revoked",
+        description: "The session has been successfully revoked.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to revoke session. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  if (securityLoading || sessionsLoading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    )
+  }
+
+  if (securityError || sessionsError || !security) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold">Error loading security settings</h2>
+          <p className="text-muted-foreground">{securityError || sessionsError || "Security settings not found"}</p>
+        </div>
+      </div>
+    )
+  }
 
   const loginHistory = [
     {
@@ -150,16 +187,20 @@ export default function SecurityPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  {twoFactorEnabled && (
+                  {security.two_factor_enabled && (
                     <Badge variant="secondary" className="bg-green-100 text-green-700">
                       <CheckCircle className="mr-1 h-3 w-3" />
                       Enabled
                     </Badge>
                   )}
-                  <Switch checked={twoFactorEnabled} onCheckedChange={setTwoFactorEnabled} />
+                  <Switch
+                    checked={security.two_factor_enabled}
+                    onCheckedChange={(checked) => handleSecurityChange("two_factor_enabled", checked)}
+                    disabled={isSaving}
+                  />
                 </div>
               </div>
-              {twoFactorEnabled && (
+              {security.two_factor_enabled && (
                 <div className="p-3 rounded-lg bg-green-50 border border-green-200">
                   <div className="flex items-center gap-2 text-sm text-green-700">
                     <CheckCircle className="h-4 w-4" />
@@ -169,9 +210,9 @@ export default function SecurityPage() {
               )}
               <div className="flex gap-2">
                 <Button variant="outline" size="sm">
-                  {twoFactorEnabled ? "Reconfigure" : "Setup"}
+                  {security.two_factor_enabled ? "Reconfigure" : "Setup"}
                 </Button>
-                {twoFactorEnabled && (
+                {security.two_factor_enabled && (
                   <Button variant="outline" size="sm">
                     View Recovery Codes
                   </Button>
@@ -194,7 +235,11 @@ export default function SecurityPage() {
                   <div className="font-medium">Login Notifications</div>
                   <div className="text-sm text-muted-foreground">Get notified when someone logs into your account</div>
                 </div>
-                <Switch checked={loginNotifications} onCheckedChange={setLoginNotifications} />
+                <Switch
+                  checked={security.login_notifications}
+                  onCheckedChange={(checked) => handleSecurityChange("login_notifications", checked)}
+                  disabled={isSaving}
+                />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
@@ -204,7 +249,11 @@ export default function SecurityPage() {
                     Automatically log out after 30 minutes of inactivity
                   </div>
                 </div>
-                <Switch defaultChecked />
+                <Switch
+                  checked={security.session_timeout}
+                  onCheckedChange={(checked) => handleSecurityChange("session_timeout", checked)}
+                  disabled={isSaving}
+                />
               </div>
               <Separator />
               <div className="flex items-center justify-between">
@@ -212,7 +261,11 @@ export default function SecurityPage() {
                   <div className="font-medium">Suspicious Activity Alerts</div>
                   <div className="text-sm text-muted-foreground">Get alerts for unusual account activity</div>
                 </div>
-                <Switch defaultChecked />
+                <Switch
+                  checked={security.suspicious_activity}
+                  onCheckedChange={(checked) => handleSecurityChange("suspicious_activity", checked)}
+                  disabled={isSaving}
+                />
               </div>
             </CardContent>
           </Card>
@@ -236,21 +289,25 @@ export default function SecurityPage() {
                     </div>
                     <div>
                       <div className="font-medium flex items-center gap-2">
-                        {session.device}
-                        {session.current && (
+                        {session.device_name}
+                        {session.is_current && (
                           <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
                             Current
                           </Badge>
                         )}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {session.location} • {session.ip}
+                        {session.location} • {session.ip_address}
                       </div>
-                      <div className="text-xs text-muted-foreground">{session.lastActive}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {session.is_current
+                          ? "Active now"
+                          : `Last active: ${new Date(session.last_active).toLocaleString()}`}
+                      </div>
                     </div>
                   </div>
-                  {!session.current && (
-                    <Button variant="outline" size="sm">
+                  {!session.is_current && (
+                    <Button variant="outline" size="sm" onClick={() => handleRevokeSession(session.id)}>
                       Revoke
                     </Button>
                   )}
