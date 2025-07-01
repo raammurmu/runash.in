@@ -32,6 +32,7 @@ import {
   DollarSign,
   Eye,
   Clock,
+  AlertTriangle,
 } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -236,6 +237,39 @@ const data = {
           title: "Preferences",
           url: "/account/preferences",
           icon: Settings2,
+        },
+      ],
+    },
+    {
+      title: "Admin",
+      url: "#",
+      icon: Shield,
+      badge: "Admin",
+      items: [
+        {
+          title: "Dashboard",
+          url: "/admin",
+          icon: BarChart3,
+        },
+        {
+          title: "User Management",
+          url: "/admin/users",
+          icon: Users,
+        },
+        {
+          title: "Feature Flags",
+          url: "/admin/features",
+          icon: Zap,
+        },
+        {
+          title: "System Alerts",
+          url: "/admin/alerts",
+          icon: AlertTriangle,
+        },
+        {
+          title: "Activity Logs",
+          url: "/admin/logs",
+          icon: Clock,
         },
       ],
     },
