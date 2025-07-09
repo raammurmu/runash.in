@@ -296,7 +296,7 @@ export default function BlogPage() {
         </div>
         
       </section>
-             {/* Blog Content */}
+  {/* Blog Content */}
       <section className="py-16 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -355,7 +355,12 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
-
+              </TabsContent>
+              </Tabs>
+            </div>
+          </div>
+        </section>
+       
                 {/* Recent Posts */}
                 {/*   <div>
                   <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Recent Posts</h2>
