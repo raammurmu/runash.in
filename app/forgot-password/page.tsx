@@ -70,8 +70,8 @@ export default function ForgotPasswordPage() {
       <main className="flex-1 flex items-center justify-center p-6">
    <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> 
           {/* Left Side - Information */}
-     {/* <div className="space-y-8">
-            <div className="space-y-4">
+      <div className="space-y-8">
+        {/* <div className="space-y-4">
               <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
                 Reset your{" "}
                 <span className="bg-gradient-to-r from-orange-600 to-amber-600 text-transparent bg-clip-text">
@@ -111,7 +111,7 @@ export default function ForgotPasswordPage() {
               </div>
             </div> */}
               
-          </div> */}
+          </div> 
 
           {/* Right Side - Reset Form */}
           <div className="flex justify-center lg:justify-end">
