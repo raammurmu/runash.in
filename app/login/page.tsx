@@ -79,7 +79,7 @@ export default function LoginPage() {
            <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg">R</div>
           </div> */}
           <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 via-orange-500 to-orange-500 dark:from-orange-400 dark:via-orange-300 dark:to-amber-300 text-transparent bg-clip-text">
-            RunAsh
+            RunAsh AI 
           </span>
         </Link>
         <div className="flex items-center gap-4">
