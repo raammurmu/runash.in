@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Equal } from "lucide-react"
 import Link from "next/link"
 import { ThemeSelector } from "@/components/theme-selector"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,7 +35,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-yellow-500 dark:from-orange-400 dark:to-yellow-300 text-transparent bg-clip-text">
-                RunAsh
+                RunAsh AI 
               </span>
             </Link>
           </div>
@@ -68,7 +69,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeSelector />
+            <ThemeToggle />
             <Link href="/login">
               <Button
                 variant="ghost"
@@ -86,9 +87,9 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <ThemeSelector />
+             <ThemeToggle /> 
             <Button variant="ghost" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Equal className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -114,7 +115,7 @@ export default function Navbar() {
               href="/docs"
               className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-md"
             >
-              Documentation
+              Docs
             </Link>
             <Link
               href="/blog"
