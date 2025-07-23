@@ -68,7 +68,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeSelector />
+              {/* <ThemeSelector /> */}
             <Link href="/login">
               <Button
                 variant="ghost"
@@ -86,7 +86,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <ThemeSelector />
+            {/* <ThemeSelector /> */}
             <Button variant="ghost" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
