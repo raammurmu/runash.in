@@ -299,6 +299,7 @@ export default function BecomeSellerPage() {
           <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
         </div>
       </section>
+      
      {/* Stats Section */}
       <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
         <div className="container mx-auto px-4">
@@ -310,8 +311,8 @@ export default function BecomeSellerPage() {
           </div>
         </div>
       </section>
-      </div>
     
+   
 
       {/* Features Section */}
       <section
