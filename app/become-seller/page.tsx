@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import StatCounter from "@/components/stat-counter"
 import TechBadge from "@/components/tech-badge"
-import { useRouter } from "next/navigation"
 import VideoBackground from "@/components/video-background"
 import {
   Users,
@@ -311,8 +310,6 @@ export default function BecomeSellerPage() {
           </div>
         </div>
       </section>
-    
-   
 
       {/* Features Section */}
       <section
