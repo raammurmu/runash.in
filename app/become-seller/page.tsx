@@ -245,17 +245,7 @@ export default function BecomeSellerPage() {
       </section>
 
       
-     {/* Stats Section */}
-      <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
-            <StatCounter value={1000} label="100% Organic Certified Farms" suffix="+" />
-            <StatCounter value={99.9} label="Sustainable" suffix="%" />
-            <StatCounter value={100} label="100% Organic Certified Recipe" suffix="+" />
-          </div>
-        </div>
-      </section>
+     
 
       {/* Features Section */}
       <section
