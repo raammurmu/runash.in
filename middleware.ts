@@ -28,11 +28,11 @@ export async function middleware(request: NextRequest) {
     "/cookies",
     "/roadmap",
     "/status",
-    "/ai",
-    "/become-seller",
-    "/docs",
     "/dashboard",
-    
+    "/analytic",
+    "/admin",
+    "/stream",
+    "/recording",
   ]
 
   // API routes that don't require authentication
@@ -55,20 +55,20 @@ export async function middleware(request: NextRequest) {
 
   // Protect streaming routes
   if (
-    (pathname.startsWith("/streaming") || pathname.startsWith("/") || pathname.startsWith("/")) &&
+    (pathname.startsWith("/") || pathname.startsWith("/") || pathname.startsWith("/")) &&
     !token
   ) {
     return NextResponse.redirect(new URL("/login", request.url))
   }
 
   // Protect admin routes
-  if (pathname.startsWith("/admin") && token?.role !== "admin") {
-    return NextResponse.redirect(new URL("/dashboard", request.url))
+  if (pathname.startsWith("/") && token?.role !== "admin") {
+    return NextResponse.redirect(new URL("/", request.url))
   }
 
   // Redirect authenticated users away from auth pages
   if (token && (pathname === "/login" || pathname === "/get-started")) {
-    return NextResponse.redirect(new URL("/dashboard", request.url))
+    return NextResponse.redirect(new URL("/", request.url))
   }
 
   return NextResponse.next()

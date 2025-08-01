@@ -81,8 +81,8 @@ export default function DocsPage() {
       category: "Live Streaming",
       readTime: "12 min",
       difficulty: "Beginner",
-      rating: 0,
-      views: "0K",
+      rating: 4.9,
+      views: "15.2K",
     },
     {
       title: "AI Enhancement Features Explained",
