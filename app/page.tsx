@@ -32,79 +32,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
       <Navbar />
-      
-      {/* Hero Section with Video Background */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
-        <VideoBackground />
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
-            <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-              Introducing 
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-            RunAsh AI Live Streaming Platform 
-          </h1>
-          <p className=" text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-            The next generation of AI live streaming selling platform where sellers build own live streaming 
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-orange-600 to-yellow-500 hover:from-orange-700 hover:to-yellow-600 text-white shadow-lg shadow-orange-500/20 dark:shadow-orange-500/10"
-              onClick={() => router.push("/stream")}
-            >
-               Get Started  <Play className="ml-2 h-4 w-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-orange-500 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950"
-              onClick={() => router.push("/")}
-            >
-              Learn More <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>     
-         {/* Tech badges */}
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            <TechBadge label="Real-time Streaming" />
-            <TechBadge label="Live Streaming Selling" />
-            <TechBadge label="Products Demonstration" />
-            <TechBadge label="Interactive Live Chat" />
-            <TechBadge label="Polls or Q&A sessions" />
-            <TechBadge label="Post-Live Stream" />
-            <TechBadge label="Analytics" />
-          </div>
-        </div>
-        <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-          <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
-        </div>
-      </section>
-     {/* Stats Section */}
-      <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
-            <StatCounter value={1000} label="100% Organic Certified Farms" suffix="+" />
-            <StatCounter value={99.9} label="Sustainable" suffix="%" />
-            <StatCounter value={100} label="100% Organic Certified Recipe" suffix="+" />
-          </div>
-        </div>
-      </section>
        {/* Hero Section with Video Background */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
             <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-              Next Generation AI Streaming
+              Introducing RunAsh AI 
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-            Elevate Your Live Streams with AI
+            AI Live Streaming Platform 
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-            The most advanced AI-powered end-to-end live streaming platform for creators, sellers, and businesses
+            The next generation of AI end-to-end live streaming platform for creators, sellers, and businesses
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -129,6 +70,7 @@ export default function Home() {
             <TechBadge label="4K Quality" />
             <TechBadge label="Low Latency" />
             <TechBadge label="Multi-platform" />
+            <TechBadge label="Upload & Stream" />
           </div>
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
@@ -469,7 +411,7 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/"
+                    href="/ai"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     AI
@@ -477,7 +419,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/chat"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     RunAshChat
@@ -485,15 +427,15 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/live"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                   LiveStore
+                   Live
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/become-seller"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     Become a seller 
@@ -507,10 +449,10 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/"
+                    href="/stream"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    RunAshStudio
+                    Studio
                   </a>
                 </li>
                 <li>
@@ -545,7 +487,7 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/tutorials"
+                    href="/docs"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     Documentation
@@ -587,7 +529,7 @@ export default function Home() {
                 <h4 className="font-medium text-sm mb-3 text-gray-700 dark:text-gray-300">Follow us</h4>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://twitter.com/runash.ai"
+                    href="https://twitter.com/runash_ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -604,7 +546,7 @@ export default function Home() {
                     >
                       <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
                     </svg>
-                    <span>Twitter</span>
+                    <span>X/Twitter</span>
                   </a>
                   <a
                     href="https://discord.com/runash.ai"
@@ -627,7 +569,7 @@ export default function Home() {
                     <span>Discord</span>
                   </a>
                   <a
-                    href="https://youtube.com/runash.ai"
+                    href="https://youtube.com/runash_ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -648,7 +590,7 @@ export default function Home() {
                     <span>YouTube</span>
                   </a>
                   <a
-                    href="https://instagram.com/runash.ai"
+                    href="https://instagram.com/runash_ai"
                     className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     <svg
@@ -694,7 +636,7 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/contact"
+                      href="/mailto:contact@runash.in"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
                       Contact 
@@ -710,10 +652,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/roadmap"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Roadmap
+                      
                     </a>
                   </li>
                 </ul>
@@ -723,34 +665,34 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/get-started"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Streaming
+                      Live Selling 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/get-started"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Multi-Host
+                      Live Shopping 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/analytics"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Analytics
+                      RunAshPay
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/ai"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      AI Features
+                      
                     </a>
                   </li>
                 </ul>
@@ -776,10 +718,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/sustainable Traker"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Sustainable Traker
+                     Pro
                     </a>
                   </li>
                   <li>
@@ -787,16 +729,16 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Recipe Planner 
+                     
                     </a>
 
                   </li>
                   <li>
                     <a
-                      href="/press"
+                      href=""
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Press
+                     
                     </a>
 
                   </li>
@@ -823,26 +765,26 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/cookies"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Cookie Policy
+                      
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/ai-policy"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      AI Policy 
+                      
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/gdpr"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     GDPR
+                     
                     </a>
 
                   </li>
@@ -856,7 +798,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Live Shopping 
+                     
                     </a>
                   </li>
                   <li>
@@ -864,7 +806,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     OrganicFarms
+                     
                     </a>
                   </li>
                   <li>
@@ -872,7 +814,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Creaters
+                     
                     </a>
                   </li>
                   <li>
@@ -880,7 +822,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Partners
+                      
                     </a>
                   </li>
                   <li>
@@ -888,7 +830,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     For Business
+                     
                     </a>
                   </li>
                   <li>
@@ -896,7 +838,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Influencers 
+                      
                     </a>
                   </li>
                 </ul>
@@ -914,10 +856,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/models"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Space 
+                     Models
                     </a>
                   </li>
                   <li>
@@ -925,7 +867,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Model
+                     
                     </a>
                   </li>
                   <li>
@@ -933,7 +875,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Dataset 
+                      
                     </a>
                   </li>
                   <li>
@@ -941,7 +883,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Notebook 
+                    
                     </a>
                   </li>
                   <li>
@@ -949,20 +891,20 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                       Task
+                       
                     </a>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Financial</h4>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Credit</h4>
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Credit 
+                     Credit beasd pricing 
                     </a>
                   </li>
                   <li>
@@ -970,7 +912,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Grant 
+                     Grants
                     </a>
                   </li>
                   <li>
@@ -978,7 +920,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Free Credit 
+                     Buy Credit 
                     </a>
                   </li>
                   <li>
@@ -986,7 +928,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Sponsor
+                      
                     </a>
                   </li>
                   <li>
@@ -994,7 +936,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      e₹upee
+                     
                     </a>
                   </li>
                   <li>
@@ -1002,7 +944,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      RunAshPay
+                      
                     </a>
                   </li>
                 </ul>
@@ -1020,18 +962,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/api"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      API
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/integrations"
-                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                    >
-                      Integrations
+                      
                     </a>
                   </li>
                   <li>
@@ -1039,7 +973,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Mobile App
+                      
                     </a>
                   </li>
                   <li>
@@ -1047,7 +981,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      PWA
+                      
                     </a>
                   </li>
                   <li>
@@ -1055,7 +989,15 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Changelog 
+                      
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                      
                     </a>
                   </li>
                 </ul>
@@ -1077,19 +1019,19 @@ export default function Home() {
                   href="/privacy"
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
-                  Privacy Policy
+                  Privacy 
                 </a>
                 <a
                   href="/terms"
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
-                  Terms of Service
+                  TOS
                 </a>
                 <a
                   href="/cookies"
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
-                  Cookie Policy
+                  AI Policy 
                 </a>
               </div>
             </div>
