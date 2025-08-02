@@ -473,4 +473,3 @@ export default function ForumPage() {
     </main>
   )
 }
-</merged_code>
