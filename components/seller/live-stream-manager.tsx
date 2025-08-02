@@ -1,0 +1,407 @@
+"use client"
+
+import { useState } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { format } from "date-fns"
+import {
+  Video,
+  Plus,
+  CalendarIcon,
+  Clock,
+  Users,
+  Eye,
+  DollarSign,
+  Edit,
+  Play,
+  Square,
+  Settings,
+  Share2,
+} from "lucide-react"
+
+const mockStreams = [
+  {
+    id: 1,
+    title: "Organic Vegetables Showcase",
+    description: "Fresh organic vegetables from our farm",
+    status: "live",
+    viewers: 1234,
+    revenue: 890,
+    startTime: "2024-01-15T10:00:00",
+    duration: "2h 15m",
+    category: "vegetables",
+  },
+  {
+    id: 2,
+    title: "Fresh Herbs Collection",
+    description: "Aromatic herbs perfect for cooking",
+    status: "scheduled",
+    viewers: 0,
+    revenue: 0,
+    startTime: "2024-01-16T14:00:00",
+    duration: "1h 30m",
+    category: "herbs",
+  },
+  {
+    id: 3,
+    title: "Seasonal Fruits Special",
+    description: "Best seasonal fruits available now",
+    status: "completed",
+    viewers: 1456,
+    revenue: 1234,
+    startTime: "2024-01-13T16:00:00",
+    duration: "1h 45m",
+    category: "fruits",
+  },
+]
+
+export function LiveStreamManager() {
+  const [streams, setStreams] = useState(mockStreams)
+  const [selectedDate, setSelectedDate] = useState<Date>()
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "live":
+        return "bg-red-500"
+      case "scheduled":
+        return "bg-blue-500"
+      case "completed":
+        return "bg-green-500"
+      default:
+        return "bg-gray-500"
+    }
+  }
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "live":
+        return "Live"
+      case "scheduled":
+        return "Scheduled"
+      case "completed":
+        return "Completed"
+      default:
+        return "Unknown"
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold">Live Stream Manager</h2>
+          <p className="text-muted-foreground">Manage your live streams and scheduled broadcasts</p>
+        </div>
+        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Schedule Stream
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Schedule New Stream</DialogTitle>
+              <DialogDescription>Create a new live stream session for your organic products</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="title">Stream Title</Label>
+                  <Input id="title" placeholder="Enter stream title" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="category">Category</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="vegetables">Vegetables</SelectItem>
+                      <SelectItem value="fruits">Fruits</SelectItem>
+                      <SelectItem value="herbs">Herbs & Spices</SelectItem>
+                      <SelectItem value="dairy">Dairy Products</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="description">Description</Label>
+                <Textarea id="description" placeholder="Describe your stream content" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Date</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" className="w-full justify-start text-left font-normal bg-transparent">
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="time">Time</Label>
+                  <Input id="time" type="time" />
+                </div>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button className="bg-gradient-to-r from-orange-500 to-amber-500">Schedule Stream</Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      {/* Stream Tabs */}
+      <Tabs defaultValue="all" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="all">All Streams</TabsTrigger>
+          <TabsTrigger value="live">Live Now</TabsTrigger>
+          <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
+          <TabsTrigger value="completed">Completed</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all" className="space-y-4">
+          <div className="grid gap-4">
+            {streams.map((stream) => (
+              <Card key={stream.id} className="border-0 shadow-lg bg-white/80 backdrop-blur">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 flex items-center justify-center">
+                        <Video className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-semibold text-lg">{stream.title}</h3>
+                          <Badge className={`${getStatusColor(stream.status)} text-white`}>
+                            {getStatusText(stream.status)}
+                          </Badge>
+                        </div>
+                        <p className="text-muted-foreground mb-2">{stream.description}</p>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <CalendarIcon className="h-4 w-4" />
+                            {format(new Date(stream.startTime), "MMM dd, yyyy")}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {format(new Date(stream.startTime), "HH:mm")}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Users className="h-4 w-4" />
+                            {stream.viewers} viewers
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <DollarSign className="h-4 w-4" />${stream.revenue}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {stream.status === "live" && (
+                        <Button size="sm" variant="destructive">
+                          <Square className="h-4 w-4 mr-2" />
+                          End Stream
+                        </Button>
+                      )}
+                      {stream.status === "scheduled" && (
+                        <Button size="sm" className="bg-gradient-to-r from-orange-500 to-amber-500">
+                          <Play className="h-4 w-4 mr-2" />
+                          Start Stream
+                        </Button>
+                      )}
+                      <Button size="sm" variant="outline">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        <Share2 className="h-4 w-4" />
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="live">
+          <div className="grid gap-4">
+            {streams
+              .filter((s) => s.status === "live")
+              .map((stream) => (
+                <Card
+                  key={stream.id}
+                  className="border-0 shadow-lg bg-white/80 backdrop-blur border-l-4 border-l-red-500"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-lg bg-gradient-to-r from-red-500 to-pink-500 flex items-center justify-center animate-pulse">
+                          <Video className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-lg">{stream.title}</h3>
+                            <Badge className="bg-red-500 text-white animate-pulse">🔴 LIVE</Badge>
+                          </div>
+                          <p className="text-muted-foreground mb-2">{stream.description}</p>
+                          <div className="flex items-center gap-4 text-sm">
+                            <div className="flex items-center gap-1 text-red-600 font-medium">
+                              <Users className="h-4 w-4" />
+                              {stream.viewers} watching now
+                            </div>
+                            <div className="flex items-center gap-1 text-green-600 font-medium">
+                              <DollarSign className="h-4 w-4" />${stream.revenue} earned
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <Button size="sm" variant="destructive">
+                        <Square className="h-4 w-4 mr-2" />
+                        End Stream
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="scheduled">
+          <div className="grid gap-4">
+            {streams
+              .filter((s) => s.status === "scheduled")
+              .map((stream) => (
+                <Card
+                  key={stream.id}
+                  className="border-0 shadow-lg bg-white/80 backdrop-blur border-l-4 border-l-blue-500"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                          <CalendarIcon className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-lg">{stream.title}</h3>
+                            <Badge className="bg-blue-500 text-white">Scheduled</Badge>
+                          </div>
+                          <p className="text-muted-foreground mb-2">{stream.description}</p>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <CalendarIcon className="h-4 w-4" />
+                              {format(new Date(stream.startTime), "MMM dd, yyyy")}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {format(new Date(stream.startTime), "HH:mm")}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" className="bg-gradient-to-r from-orange-500 to-amber-500">
+                          <Play className="h-4 w-4 mr-2" />
+                          Start Now
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="completed">
+          <div className="grid gap-4">
+            {streams
+              .filter((s) => s.status === "completed")
+              .map((stream) => (
+                <Card
+                  key={stream.id}
+                  className="border-0 shadow-lg bg-white/80 backdrop-blur border-l-4 border-l-green-500"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center">
+                          <Eye className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-lg">{stream.title}</h3>
+                            <Badge className="bg-green-500 text-white">Completed</Badge>
+                          </div>
+                          <p className="text-muted-foreground mb-2">{stream.description}</p>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <CalendarIcon className="h-4 w-4" />
+                              {format(new Date(stream.startTime), "MMM dd, yyyy")}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {stream.duration}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Users className="h-4 w-4" />
+                              {stream.viewers} viewers
+                            </div>
+                            <div className="flex items-center gap-1 text-green-600 font-medium">
+                              <DollarSign className="h-4 w-4" />${stream.revenue}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" variant="outline">
+                          <Eye className="h-4 w-4 mr-2" />
+                          View Recording
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Share2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
