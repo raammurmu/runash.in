@@ -419,18 +419,18 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/chat"
+                    href="/live"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    RunAshChat
+                    Live
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/live"
+                    href="/chat"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                   Live
+                   RunAshChat
                   </a>
                 </li>
                 <li>
@@ -468,7 +468,7 @@ export default function Home() {
                     href="/"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Android App 
+                    Web App 
                   </a>
                 </li>
                 <li>
@@ -476,7 +476,7 @@ export default function Home() {
                     href="/"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Web App 
+                    Android App 
                   </a>
                 </li>
               </ul>
@@ -487,10 +487,18 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/docs"
+                    href="/learn"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Documentation
+                    Learn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/blog"
+                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                  >
+                    Blog
                   </a>
                 </li>
                 <li>
@@ -503,18 +511,10 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/learn"
-                    className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                  >
-                    Learn 
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="/community"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
-                    Community 
+                    Documents
                   </a>
                 </li>
               </ul>
@@ -644,10 +644,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/careers"
+                      href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Careers
+                      
                     </a>
                   </li>
                   <li>
@@ -684,7 +684,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      RunAshPay
+                      
                     </a>
                   </li>
                   <li>
@@ -698,30 +698,30 @@ export default function Home() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Resources</h4>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Community</h4>
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/blog"
+                      href="/https://github.com/runash-ai"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      Blog
+                      GitHub
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/pricing"
+                      href="https://x.com/runash_ai"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Pricing 
+                     X/Twitter 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/https://Huggingface.com/runash_ai"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Pro
+                     Hugging Face 
                     </a>
                   </li>
                   <li>
@@ -768,7 +768,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      
+                      AI Policy 
                     </a>
                   </li>
                   <li>
@@ -795,26 +795,26 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/"
+                      href="/pro"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     
+                     Pro
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/pricing"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     
+                     Pricing 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/enterprise"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     
+                     Enterprise 
                     </a>
                   </li>
                   <li>
@@ -848,7 +848,7 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/"
+                      href="/ai-overview"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
                    Overview 
@@ -864,10 +864,10 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/https://ai.runash.in"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     
+                     Live Generation 
                     </a>
                   </li>
                   <li>
@@ -904,15 +904,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Credit beasd pricing 
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/"
-                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                    >
-                     Grants
+                     Free Credit
                     </a>
                   </li>
                   <li>
@@ -921,6 +913,14 @@ export default function Home() {
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
                      Buy Credit 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Grants 
                     </a>
                   </li>
                   <li>
@@ -965,7 +965,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      
+                      API
                     </a>
                   </li>
                   <li>
@@ -973,7 +973,7 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                      
+                      Editor 
                     </a>
                   </li>
                   <li>
