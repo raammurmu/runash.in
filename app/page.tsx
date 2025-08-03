@@ -42,10 +42,10 @@ export default function Home() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-            AI Live Streaming Platform 
+            Live Streaming Platform 
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-            The next generation of AI end-to-end live streaming platform for creators, sellers, and businesses
+            The next generation of AI live streaming platform for creators, sellers, and businesses
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -98,7 +98,7 @@ export default function Home() {
               <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">Powerful Features</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-              AI-Powered Streaming Tools
+              AI Streaming Tools
             </h2>
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
               Unlock the full potential of your content with our cutting-edge AI features designed for modern creators
@@ -360,8 +360,8 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">Ready to Transform Your Streams?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Join thousands of content creators who are elevating their streaming with RunAsh AI. Start your free 14-day
-            trial today.
+            Join thousands of content creators who are elevating their streaming with RunAsh AI. Start your free trial 
+            today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg shadow-orange-700/20"
@@ -387,7 +387,7 @@ export default function Home() {
             <div className="lg:col-span-2">
               <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">RunAsh AI</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                RunAsh AI as an AI Research and Development Company focusing on live streaming innovation
+                Research and Development Company Lab focusing on live streaming innovation
               </p>
               <div className="flex items-center gap-2 mb-4">
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -399,7 +399,7 @@ export default function Home() {
               </div>
 
               {/* Language and Country Selector */}
-              <div className="flex flex-col sm:flex-row border gap-3 mt-4">
+              <div className="flex flex-col sm:flex-row gap-3 mt-4">
                 <LanguageSelector />
                 <CountrySelector />
               </div>
