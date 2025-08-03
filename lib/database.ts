@@ -69,6 +69,53 @@ export interface Recording {
   created_at: Date
 }
 
+export interface Product {
+  id: string
+  name: string
+  description: string
+  price: number
+  category: string
+  image: string
+  inStock: boolean
+  isOrganic: boolean
+  isLocal: boolean
+  sustainabilityScore: number
+  nutritionalInfo: {
+    calories: number
+    protein: number
+    carbohydrates: number
+    fat: number
+    fiber: number
+    sugar: number
+  }
+  certifications: string[]
+  supplier: string
+  carbonFootprint: number
+  rating: number
+  reviewCount: number
+  tags: string[]
+  variants?: Array<{
+    id: string
+    name: string
+    price: number
+    inStock: boolean
+  }>
+}
+
+export interface DatabaseFilters {
+  category?: string
+  minPrice?: number
+  maxPrice?: number
+  isOrganic?: boolean
+  isLocal?: boolean
+  inStock?: boolean
+  search?: string
+  sortBy?: "name" | "price" | "rating" | "popularity"
+  sortOrder?: "asc" | "desc"
+  page?: number
+  limit?: number
+}
+
 export class DatabaseService {
   static async saveChatMessage(messageData: Omit<ChatMessage, "id">): Promise<ChatMessage> {
     const result = await sql`
