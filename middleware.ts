@@ -49,7 +49,7 @@ export async function middleware(request: NextRequest) {
     "/ai-overview",
     "/models",
     "/checkout",
-    "/sellerdashboard",
+    "/seller/seller-dashboard",
     "/live",
     "/mobile",
     
