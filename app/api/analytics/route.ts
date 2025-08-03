@@ -1,71 +1,95 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { DatabaseService } from "@/lib/database"
 import { authOptions } from "@/lib/auth"
+import { neon } from "@neondatabase/serverless"
 
-export async function GET(request: NextRequest) {
+const sql = neon(process.env.DATABASE_URL!)
+
+export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const { searchParams } = new URL(request.url)
+    const { searchParams } = new URL(req.url)
+    const period = searchParams.get("period") || "7d"
     const streamId = searchParams.get("streamId")
-    const timeRange = searchParams.get("timeRange") || "7d"
 
-    // Get user's streams
-    const streams = await DatabaseService.getUserStreams(session.user.id)
+    let dateFilter = ""
+    switch (period) {
+      case "24h":
+        dateFilter = "created_at >= NOW() - INTERVAL '24 hours'"
+        break
+      case "7d":
+        dateFilter = "created_at >= NOW() - INTERVAL '7 days'"
+        break
+      case "30d":
+        dateFilter = "created_at >= NOW() - INTERVAL '30 days'"
+        break
+      default:
+        dateFilter = "created_at >= NOW() - INTERVAL '7 days'"
+    }
 
-    // Calculate analytics
-    const totalStreams = streams.length
-    const liveStreams = streams.filter((s) => s.status === "live").length
-    const totalViewers = streams.reduce((sum, s) => sum + s.viewerCount, 0)
-    const avgViewers = totalStreams > 0 ? Math.round(totalViewers / totalStreams) : 0
+    // Get stream analytics
+    const streamAnalytics = await sql`
+      SELECT 
+        COUNT(*) as total_streams,
+        AVG(viewer_count) as avg_viewers,
+        SUM(viewer_count) as total_views,
+        COUNT(CASE WHEN status = 'live' THEN 1 END) as live_streams
+      FROM streams 
+      WHERE user_id = ${session.user.id} 
+      AND ${sql.unsafe(dateFilter)}
+    `
 
-    // Get recordings analytics
-    const recordings = await DatabaseService.getRecordings(session.user.id)
-    const totalRecordings = recordings.length
-    const totalViews = recordings.reduce((sum, r) => sum + r.viewCount, 0)
+    // Get chat analytics
+    const chatAnalytics = await sql`
+      SELECT 
+        COUNT(*) as total_messages,
+        COUNT(DISTINCT user_id) as unique_chatters,
+        COUNT(CASE WHEN message_type = 'donation' THEN 1 END) as donations,
+        COUNT(CASE WHEN message_type = 'follow' THEN 1 END) as new_followers
+      FROM chat_messages cm
+      JOIN streams s ON cm.stream_id = s.id
+      WHERE s.user_id = ${session.user.id}
+      AND cm.${sql.unsafe(dateFilter)}
+    `
 
-    // Mock engagement data (you can implement real analytics)
-    const engagementData = [
-      { date: "2024-01-01", viewers: 120, engagement: 85 },
-      { date: "2024-01-02", viewers: 150, engagement: 92 },
-      { date: "2024-01-03", viewers: 180, engagement: 78 },
-      { date: "2024-01-04", viewers: 200, engagement: 95 },
-      { date: "2024-01-05", viewers: 175, engagement: 88 },
-      { date: "2024-01-06", viewers: 220, engagement: 91 },
-      { date: "2024-01-07", viewers: 250, engagement: 96 },
-    ]
+    // Get recording analytics
+    const recordingAnalytics = await sql`
+      SELECT 
+        COUNT(*) as total_recordings,
+        SUM(duration) as total_duration,
+        AVG(duration) as avg_duration,
+        SUM(file_size) as total_storage
+      FROM recordings r
+      JOIN streams s ON r.stream_id = s.id
+      WHERE s.user_id = ${session.user.id}
+      AND r.${sql.unsafe(dateFilter)}
+    `
+
+    // Get daily breakdown
+    const dailyBreakdown = await sql`
+      SELECT 
+        DATE(created_at) as date,
+        COUNT(*) as streams,
+        AVG(viewer_count) as avg_viewers
+      FROM streams
+      WHERE user_id = ${session.user.id}
+      AND ${sql.unsafe(dateFilter)}
+      GROUP BY DATE(created_at)
+      ORDER BY date DESC
+    `
 
     return NextResponse.json({
-      success: true,
-      analytics: {
-        overview: {
-          totalStreams,
-          liveStreams,
-          totalViewers,
-          avgViewers,
-          totalRecordings,
-          totalViews,
-        },
-        engagement: engagementData,
-        topStreams: streams
-          .sort((a, b) => b.viewerCount - a.viewerCount)
-          .slice(0, 5)
-          .map((s) => ({
-            id: s.id,
-            title: s.title,
-            viewers: s.viewerCount,
-            duration:
-              s.endTime && s.startTime ? Math.round((s.endTime.getTime() - s.startTime.getTime()) / 1000 / 60) : 0,
-          })),
-      },
+      streams: streamAnalytics[0],
+      chat: chatAnalytics[0],
+      recordings: recordingAnalytics[0],
+      daily: dailyBreakdown,
     })
   } catch (error) {
-    console.error("Get analytics error:", error)
-    return NextResponse.json({ error: "Failed to get analytics" }, { status: 500 })
+    console.error("Analytics error:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

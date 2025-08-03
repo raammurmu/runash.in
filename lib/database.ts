@@ -45,6 +45,30 @@ export interface RecordingRecord {
   viewCount: number
 }
 
+export interface Stream {
+  id: string
+  title: string
+  description: string
+  user_id: string
+  status: "scheduled" | "live" | "ended"
+  platform: string
+  stream_key: string
+  viewer_count: number
+  created_at: Date
+  started_at?: Date
+  ended_at?: Date
+}
+
+export interface Recording {
+  id: string
+  stream_id: string
+  file_url: string
+  thumbnail_url?: string
+  duration: number
+  file_size: number
+  created_at: Date
+}
+
 export class DatabaseService {
   static async saveChatMessage(messageData: Omit<ChatMessage, "id">): Promise<ChatMessage> {
     const result = await sql`
@@ -248,5 +272,107 @@ export class DatabaseService {
       SET view_count = COALESCE(view_count, 0) + 1 
       WHERE id = ${recordingId}
     `
+  }
+}
+
+// Legacy Database class for backward compatibility
+export class Database {
+  static async createStream(data: Omit<Stream, "id" | "created_at">): Promise<Stream> {
+    const result = await sql`
+      INSERT INTO streams (title, description, user_id, status, platform, stream_key, viewer_count)
+      VALUES (${data.title}, ${data.description}, ${data.user_id}, ${data.status}, ${data.platform}, ${data.stream_key}, ${data.viewer_count})
+      RETURNING *
+    `
+    return result[0] as Stream
+  }
+
+  static async getStream(id: string): Promise<Stream | null> {
+    const result = await sql`
+      SELECT * FROM streams WHERE id = ${id}
+    `
+    return (result[0] as Stream) || null
+  }
+
+  static async updateStream(id: string, data: Partial<Stream>): Promise<Stream> {
+    const setClause = Object.keys(data)
+      .map((key) => `${key} = $${Object.keys(data).indexOf(key) + 2}`)
+      .join(", ")
+
+    const values = [id, ...Object.values(data)]
+
+    const result = await sql`
+      UPDATE streams 
+      SET ${sql.unsafe(setClause)}
+      WHERE id = $1
+      RETURNING *
+    `.apply(null, values)
+
+    return result[0] as Stream
+  }
+
+  static async getUserStreams(userId: string): Promise<Stream[]> {
+    const result = await sql`
+      SELECT * FROM streams 
+      WHERE user_id = ${userId}
+      ORDER BY created_at DESC
+    `
+    return result as Stream[]
+  }
+
+  static async createRecording(data: Omit<Recording, "id" | "created_at">): Promise<Recording> {
+    const result = await sql`
+      INSERT INTO recordings (stream_id, file_url, thumbnail_url, duration, file_size)
+      VALUES (${data.stream_id}, ${data.file_url}, ${data.thumbnail_url}, ${data.duration}, ${data.file_size})
+      RETURNING *
+    `
+    return result[0] as Recording
+  }
+
+  static async getRecordings(streamId: string): Promise<Recording[]> {
+    const result = await sql`
+      SELECT * FROM recordings 
+      WHERE stream_id = ${streamId}
+      ORDER BY created_at DESC
+    `
+    return result as Recording[]
+  }
+
+  static async saveChatMessage(data: Omit<ChatMessage, "id" | "timestamp">): Promise<ChatMessage> {
+    const result = await sql`
+      INSERT INTO chat_messages (stream_id, user_id, username, message, type, platform, metadata)
+      VALUES (${data.streamId}, ${data.userId}, ${data.username}, ${data.message}, ${data.type}, ${data.platform}, ${JSON.stringify(data.metadata)})
+      RETURNING *
+    `
+    return {
+      id: result[0].id,
+      streamId: result[0].stream_id,
+      userId: result[0].user_id,
+      username: result[0].username,
+      message: result[0].message,
+      timestamp: new Date(result[0].timestamp),
+      platform: result[0].platform,
+      type: result[0].type,
+      metadata: result[0].metadata,
+    }
+  }
+
+  static async getChatMessages(streamId: string, limit = 100): Promise<ChatMessage[]> {
+    const result = await sql`
+      SELECT * FROM chat_messages 
+      WHERE stream_id = ${streamId}
+      ORDER BY timestamp DESC
+      LIMIT ${limit}
+    `
+    return result.map((row) => ({
+      id: row.id,
+      streamId: row.stream_id,
+      userId: row.user_id,
+      username: row.username,
+      message: row.message,
+      timestamp: new Date(row.timestamp),
+      platform: row.platform,
+      type: row.type,
+      metadata: row.metadata,
+    }))
   }
 }

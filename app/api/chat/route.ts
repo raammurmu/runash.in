@@ -2,6 +2,10 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { DatabaseService } from "@/lib/database"
 import { authOptions } from "@/lib/auth"
+import { openai } from "@ai-sdk/openai"
+import { streamText } from "ai"
+
+export const maxDuration = 30
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,26 +15,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const messageData = await request.json()
+    const { messages, context } = await request.json()
 
-    const message = await DatabaseService.saveChatMessage({
-      streamId: messageData.streamId,
-      userId: session.user.id,
-      username: session.user.name || "Anonymous",
-      message: messageData.message,
-      timestamp: new Date(),
-      platform: messageData.platform || "runash",
-      type: messageData.type || "message",
-      metadata: messageData.metadata || {},
+    // Add context-aware system prompt based on the chat context
+    let systemPrompt = `You are RunAsh AI, a helpful assistant for the RunAsh platform. You help users with live streaming, grocery shopping, and platform features.`
+
+    if (context === "grocery") {
+      systemPrompt += ` You specialize in helping users find organic products, providing nutritional information, suggesting recipes, and assisting with grocery shopping decisions. You can recommend products based on dietary preferences, sustainability goals, and health needs.`
+    } else if (context === "streaming") {
+      systemPrompt += ` You specialize in helping users with live streaming setup, technical issues, content creation tips, and platform features. You can assist with streaming software, hardware recommendations, and audience engagement strategies.`
+    }
+
+    const result = streamText({
+      model: openai("gpt-4-turbo"),
+      system: systemPrompt,
+      messages,
+      temperature: 0.7,
+      maxTokens: 1000,
     })
 
-    return NextResponse.json({
-      success: true,
-      message,
-    })
+    return result.toDataStreamResponse()
   } catch (error) {
-    console.error("Save chat message error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    console.error("Chat API error:", error)
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
   }
 }
 

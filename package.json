@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/openai": "latest",
     "@auth/core": "latest",
     "@aws-sdk/client-s3": "latest",
     "@aws-sdk/s3-request-presigner": "latest",
@@ -48,6 +49,7 @@
     "@types/hoist-non-react-statics": "latest",
     "@vercel/analytics": "latest",
     "@vercel/speed-insights": "latest",
+    "ai": "latest",
     "autoprefixer": "^10.4.20",
     "bcryptjs": "latest",
     "class-variance-authority": "^0.7.1",
