@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Banner } from "@/components/banner"
+import { Badge } from "@/components/badge"
 import { Play, Zap, Users, Shield, ArrowRight, ChevronRight, Star, BarChart, Globe,SquareArrowDownRight } from "lucide-react"
 import VideoBackground from "@/components/video-background"
 import FeatureCard from "@/components/feature-card"
@@ -850,26 +851,10 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
-                      href="/models"
+                      href="/ai"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                   Models
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/ai-overview"
-                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                    >
-                     Overview 
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/https://ai.runash.in"
-                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                    >
-                     Live Generator 
+                   AI 
                     </a>
                   </li>
                   <li>
@@ -877,7 +862,23 @@ export default function Home() {
                       href="/"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                    Agent 
+                     Models
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                     Overview 
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                    >
+                    
                     </a>
                   </li>
                   <li>
@@ -1018,16 +1019,17 @@ export default function Home() {
               <ThemeToggle />
               <div className="flex space-x-6">
                 <a
+                  href="/"
+                  className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
+                >
+                  Agent 
+                </a>
+                <Badge varient="secondary" className="text-xs">New</Badge>
+                <a
                   href="/help"
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
-                  Help 
-                </a>
-                <a
-                  href="/terms"
-                  className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
-                >
-                  TOS
+                  Help
                 </a>
                 <a
                   href="/support"
