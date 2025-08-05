@@ -1024,7 +1024,7 @@ export default function Home() {
                 >
                   Agent 
                 </a>
-                <Badge varient="secondary" className="text-xs">New</Badge>
+                <Badge className="text-xs">New</Badge>
                 <a
                   href="/help"
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
