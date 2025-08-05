@@ -11,19 +11,19 @@ export default function Banner() {
     <>
       {/* Top Banner */}
       {showBanner && (
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 text-center text-sm relative">
+        <div className="bg-gradient-to-r from-orange-600 to-yello-600 text-white py-2 px-4 text-center text-sm relative">
           <div className="flex items-center justify-center space-x-2">
             <Bell className="w-4 h-4" />
             <span>
               🎉 New AI Video Generation Model Released!{" "}
-              <Link href="/blog/new-model" className="underline font-semibold hover:text-purple-200">
+              <Link href="/blog/new-model" className="underline font-semibold hover:text-orange-200">
                 Learn more
               </Link>
             </span>
           </div>
           <button
             onClick={() => setShowBanner(false)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-purple-200"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-orange-200"
           >
             <X className="w-4 h-4" />
           </button>
