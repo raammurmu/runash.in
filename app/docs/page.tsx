@@ -167,7 +167,7 @@ export default function DocsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white py-16">
+      {/*    <section className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Documentation</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
@@ -220,8 +220,7 @@ export default function DocsPage() {
             </div>
           </div>
         </div>
-        
-      </section
+          
       </section> 
      
 
