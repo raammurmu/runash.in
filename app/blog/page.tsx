@@ -409,11 +409,11 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
+                
               </TabsContent>
-              </TabsContent>
+              
               {/* Recent Posts */}
-               
-                <div>
+               <TabsContent>
                   <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Recent Posts</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <BlogPost
@@ -471,7 +471,7 @@ export default function BlogPage() {
                       image="/placeholder.svg?height=300&width=400"
                     />
                   </div>
-                </div>
+                
               </TabsContent>
 
               <TabsContent value="tutorials" className="mt-8">
