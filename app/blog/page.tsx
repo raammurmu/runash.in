@@ -1,41 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, TrendingUp, Clock, Star, ArrowRight, Calendar, User } from "lucide-react"
-import { BlogPostCard } from "@/components/blog/blog-post-card"
-import { CategoryFilter } from "@/components/blog/category-filter"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ArrowRight, Calendar, Clock, Search, User } from "lucide-react"
 import ThemeToggle from "@/components/theme-toggle"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs" 
-import { Card, CardContent } from "@/components/ui/card" 
-
-interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  author: {
-    name: string
-    avatar: string
-  }
-  category: string
-  publishedAt: string
-  readingTime: number
-  views: number
-  likes: number
-  comments: number
-  featured: boolean
-  image: string
-}
-
-interface Category {
-  id: string
-  name: string
-  count: number
-}
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent } from "@/components/ui/card"
 
 const BlogPost = ({
   title,
@@ -106,218 +77,15 @@ const BlogPost = ({
       </CardContent>
     </Card>
   )
-      }
+}
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([])
-  const [categories, setCategories] = useState<Category[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
-  const [sortBy, setSortBy] = useState("latest")
-  const [loading, setLoading] = useState(true)
-
-  // Mock blog posts data
-  const mockPosts: BlogPost[] = [
-    {
-      id: "1",
-      title: "The Future of AI-Powered Live Streaming:",
-      slug: "future-ai-live-streaming transforming-digital-commerce",
-      excerpt:
-        "Discover how AI is revolutionizing live streaming and creating new opportunities for sellers and creators worldwide.",
-      author: {
-        name: "Ram Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "AI Technology",
-      publishedAt: "2023-01-15",
-      readingTime: 8,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: true,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-    {
-      id: "2",
-      title: "Building Trust in Organic Product Sales Through Live Demonstrations",
-      slug: "building-trust-organic-products-live-demos",
-      excerpt:
-        "Learn how live streaming can help organic product sellers build credibility and trust with their customers.",
-      author: {
-        name: "Ram Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "Organic Products",
-      publishedAt: "2023-01-12",
-      readingTime: 6,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: false,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-    {
-      id: "3",
-      title: "Maximizing Engagement: Best Practices for Live Stream Sellers",
-      slug: "maximizing-engagement-live-stream-sellers",
-      excerpt:
-        "Discover proven strategies to increase viewer engagement and boost sales during live streaming sessions.",
-      author: {
-        name: "Ram Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "Best Practices",
-      publishedAt: "2024-01-10",
-      readingTime: 7,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: false,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-    {
-      id: "4",
-      title: "From Farm to Screen: Showcasing Organic Products in the Digital Age",
-      slug: "farm-to-screen-organic-products-digital",
-      excerpt:
-        "Explore how organic farmers are using technology to connect directly with consumers and tell their stories.",
-      author: {
-        name: "Vaibhav Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "Organic Products",
-      publishedAt: "2024-01-08",
-      readingTime: 5,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: false,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-    {
-      id: "5",
-      title: "The Psychology of Live Shopping: Why Viewers Buy",
-      slug: "psychology-live-shopping-viewer-behavior",
-      excerpt:
-        "Understanding the psychological factors that drive purchasing decisions during live streaming sessions.",
-      author: {
-        name: " Vaibhav Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "Psychology",
-      publishedAt: "2024-01-05",
-      readingTime: 9,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: true,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-    {
-      id: "6",
-      title: "Setting Up Your First Live Stream: A Complete Guide",
-      slug: "setting-up-first-live-stream-guide",
-      excerpt:
-        "Everything you need to know to start your live streaming journey, from equipment to engagement strategies.",
-      author: {
-        name: "Ram Murmu",
-        avatar: "/placeholder.svg?height=100&width=100",
-      },
-      category: "Getting Started",
-      publishedAt: "2024-01-03",
-      readingTime: 12,
-      views: 0,
-      likes: 0,
-      comments: 0,
-      featured: false,
-      image: "/placeholder.svg?height=400&width=800",
-    },
-  ]
-
-  const mockCategories: Category[] = [
-    { id: "ai-research", name: "AI Research", count: 1 },
-    { id: "ai-technology", name: "AI Technology", count: 1 },
-    { id: "tutorials", name: "Tutorials", count: 1 },
-    { id: "product-updates", name: "Product Updates", count: 1 },
-    { id: "organic-products", name: "Organic Products", count: 2 },
-    { id: "best-practices", name: "Best Practices", count: 1 },
-    { id: "psychology", name: "Psychology", count: 1 },
-    { id: "getting-started", name: "Getting Started", count: 1 },
-    { id: "community", name: "Community", count: 2 },
-  ]
-
-  useEffect(() => {
-    // Simulate loading
-    setTimeout(() => {
-      setPosts(mockPosts)
-      setFilteredPosts(mockPosts)
-      setCategories(mockCategories)
-      setLoading(false)
-    }, 1000)
-  }, [])
-
-  useEffect(() => {
-    let filtered = posts
-
-    // Filter by category
-    if (selectedCategory) {
-      const categoryName = categories.find((cat) => cat.id === selectedCategory)?.name
-      filtered = filtered.filter((post) => post.category === categoryName)
-    }
-
-    // Filter by search query
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          post.author.name.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    }
-
-    // Sort posts
-    switch (sortBy) {
-      case "latest":
-        filtered.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-        break
-      case "popular":
-        filtered.sort((a, b) => b.views - a.views)
-        break
-      case "liked":
-        filtered.sort((a, b) => b.likes - a.likes)
-        break
-      case "commented":
-        filtered.sort((a, b) => b.comments - a.comments)
-        break
-    }
-
-    setFilteredPosts(filtered)
-  }, [posts, selectedCategory, searchQuery, sortBy, categories])
-
-  const featuredPosts = posts.filter((post) => post.featured)
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900">
-        <div className="container mx-auto px-4 py-8">
-          <div className="animate-pulse space-y-6">
-            <div className="h-12 bg-gray-200 rounded w-1/3"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-96 bg-gray-200 rounded-lg"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
-     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">    
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
       {/* Hero Section */}
-        <section className="relative py-24 overflow-hidden">
+      <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50/30 to-white dark:from-gray-950 dark:via-orange-950/30 dark:to-gray-950"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-5 dark:opacity-10"></div>
 
@@ -333,7 +101,7 @@ export default function BlogPage() {
               Insights & Updates
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-              Stay up to date with the latest news, tutorials,and insights from the RunAsh AI team.
+              Stay up to date with the latest news, tutorials, and insights from the RunAsh AI team.
             </p>
 
             {/* Search */}
@@ -348,9 +116,9 @@ export default function BlogPage() {
             </div>
           </div>
         </div>
-        
       </section>
-  {/* Blog Content */}
+
+      {/* Blog Content */}
       <section className="py-16 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -409,102 +177,155 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
-                
-          </TabsContent>
-       </Tabs> 
-       <div className="container mx-auto px-4 py-8">
-        {/* Featured Posts */}
-        {featuredPosts.length > 0 && (
-          <div className="mb-12">
-            <div className="flex items-center space-x-2 mb-6">
-              <Star className="h-6 w-6 text-orange-500" />
-              <h2 className="text-2xl font-bold">Latest Articles</h2>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {featuredPosts.map((post) => (
-                <BlogPostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </div>
-        )}
 
-        {/* Filters and Controls */}
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar */}
-          <div className="lg:w-1/4 space-y-6">
-            <CategoryFilter
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-              totalPosts={posts.length}
-            />
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Sort By</h3>
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="latest">
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-2" />
-                      Latest
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="popular">
-                    <div className="flex items-center">
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Most Popular
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="liked">Most Liked</SelectItem>
-                  <SelectItem value="commented">Most Commented</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:w-3/4">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">
-                {selectedCategory
-                  ? `${categories.find((cat) => cat.id === selectedCategory)?.name} Articles`
-                  : "All Articles"}
-              </h2>
-              <p className="text-gray-600">
-                {filteredPosts.length} article{filteredPosts.length !== 1 ? "s" : ""} found
-              </p>
-            </div>
-
-            {filteredPosts.length === 0 ? (
-              <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
-                  <Search className="h-16 w-16 mx-auto" />
+                {/* Recent Posts */}
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Recent Posts</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <BlogPost
+                      title="Getting Started with AI Video Enhancement"
+                      excerpt="Learn how to use RunAsh's AI video enhancement features to improve your stream quality automatically."
+                      author="Ram Murmu"
+                      date="Jun 06, 2025"
+                      readTime="5 min read"
+                      category="Tutorial"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                    <BlogPost
+                      title="Multi-Platform Streaming Best Practices"
+                      excerpt="Discover the best strategies for streaming to multiple platforms simultaneously while maintaining quality."
+                      author="Ram Murmu"
+                      date="Jun 06, 2025"
+                      readTime="7 min read"
+                      category="Tips"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                    <BlogPost
+                      title="RunAsh 2.1 Release Notes"
+                      excerpt="Explore the latest features and improvements in RunAsh AI 2.1, including enhanced chat moderation and new analytics."
+                      author="Product Team"
+                      date="Jun 04, 2025"
+                      readTime="4 min read"
+                      category="Product Updates"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                    <BlogPost
+                      title="Building Your Streaming Brand with AI"
+                      excerpt="How to leverage AI tools to create consistent branding and grow your streaming audience."
+                      author="Community Team"
+                      date="May  06, 2025"
+                      readTime="6 min read"
+                      category="Community"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                    <BlogPost
+                      title="The Science Behind Real-Time Video Processing"
+                      excerpt="A deep dive into the technical challenges and solutions for processing video streams in real-time."
+                      author="Ram Murmu"
+                      date="Feb 01, 2025"
+                      readTime="10 min read"
+                      category="AI Research"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                    <BlogPost
+                      title="Community Spotlight: Top Streamers Using RunAsh"
+                      excerpt="Meet some of the amazing content creators who are using RunAsh AI to elevate their streaming experience."
+                      author="Community Team"
+                      date="Jun 06, 2025"
+                      readTime="8 min read"
+                      category="Community"
+                      image="/placeholder.svg?height=300&width=400"
+                    />
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">No articles found</h3>
-                <p className="text-gray-600 mb-4">Try adjusting your search or filter criteria</p>
-                <Button
-                  onClick={() => {
-                    setSearchQuery("")
-                    setSelectedCategory(null)
-                  }}
-                >
-                  Clear Filters
-                </Button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredPosts.map((post) => (
-                  <BlogPostCard key={post.id} post={post} />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-       {/* Newsletter Signup */}
+              </TabsContent>
+
+              <TabsContent value="tutorials" className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <BlogPost
+                    title="Getting Started with AI Video Enhancement"
+                    excerpt="Learn how to use RunAsh's AI video enhancement features to improve your stream quality automatically."
+                    author="Vaibhav Murmu"
+                    date="Jun 06, 2025"
+                    readTime="5 min read"
+                    category="Tutorial"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                  <BlogPost
+                    title="Setting Up Multi-Platform Streaming"
+                    excerpt="Step-by-step guide to configure streaming to multiple platforms simultaneously."
+                    author="Tech Team"
+                    date="Jun 06, 2025"
+                    readTime="12 min read"
+                    category="Tutorial"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                </div>
+              </TabsContent>
+
+              <TabsContent value="product" className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <BlogPost
+                    title="RunAsh 2.1 Release Notes"
+                    excerpt="Explore the latest features and improvements in RunAsh AI 2.1, including enhanced chat moderation and new analytics."
+                    author="Product Team"
+                    date="Jun 04, 2025"
+                    readTime="4 min read"
+                    category="Product Updates"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                </div>
+              </TabsContent>
+
+              <TabsContent value="ai" className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <BlogPost
+                    title="The Future of AI-Powered Live Streaming"
+                    excerpt="Explore how artificial intelligence is revolutionizing the live streaming industry."
+                    author="Vaibhav Murmu"
+                    date="Jun 06, 2025"
+                    readTime="8 min read"
+                    category="AI Research"
+                    image="/placeholder.svg?height=300&width=400"
+                    featured={true}
+                  />
+                  <BlogPost
+                    title="The Science Behind Real-Time Video Processing"
+                    excerpt="A deep dive into the technical challenges and solutions for processing video streams in real-time."
+                    author="Vaibhav Murmu"
+                    date="Jun 06, 2025"
+                    readTime="10 min read"
+                    category="AI Research"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                </div>
+              </TabsContent>
+
+              <TabsContent value="community" className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <BlogPost
+                    title="Building Your Streaming Brand with AI"
+                    excerpt="How to leverage AI tools to create consistent branding and grow your streaming audience."
+                    author="Community Team"
+                    date="Jun 06, 2025"
+                    readTime="6 min read"
+                    category="Community"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                  <BlogPost
+                    title="Community Spotlight: Top Streamers Using RunAsh"
+                    excerpt="Meet some of the amazing content creators who are using RunAsh AI to elevate their streaming experience."
+                    author="Community Team"
+                    date="Jun 06, 2025"
+                    readTime="8 min read"
+                    category="Community"
+                    image="/placeholder.svg?height=300&width=400"
+                  />
+                </div>
+              </TabsContent>
+            </Tabs>
+
+            {/* Newsletter Signup */}
             <div className="mt-16 p-8 rounded-xl bg-gradient-to-br from-orange-100 to-yellow-100 dark:from-orange-900/30 dark:to-yellow-900/30 border border-orange-200 dark:border-orange-800/30">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2 text-orange-800 dark:text-orange-300">Stay Updated</h3>
@@ -522,10 +343,11 @@ export default function BlogPage() {
                 </Button>
               </div>
             </div>
-          
-        
-    
-     {/* Footer */}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
       <footer className="py-12 bg-white dark:bg-gray-950 border-t border-orange-200/50 dark:border-orange-900/30">
         <div className="container mx-auto px-4">
           <div className="text-center text-gray-500">
@@ -535,4 +357,4 @@ export default function BlogPage() {
       </footer>
     </div>
   )
-  }
+}
