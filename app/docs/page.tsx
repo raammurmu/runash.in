@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -184,8 +185,45 @@ export default function DocsPage() {
             </div>
           </div>
         </div>
-      </section> 
+
+      </section> */}
       
+      {/* Hero Section */}
+        <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50/30 to-white dark:from-gray-950 dark:via-orange-950/30 dark:to-gray-950"></div>
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-5 dark:opacity-10"></div>
+
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="flex justify-end mb-4">
+            <ThemeToggle />
+          </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-block mb-6 px-6 py-2 border border-orange-500/30 rounded-full bg-orange-500/10 backdrop-blur-sm">
+              <span className="text-orange-600 dark:text-orange-400">RunAsh AI Docs</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
+              Documentation 
+            </h1>
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
+              Everything you need to know about RunAsh AI Live Streaming Platform 
+            </p>
+
+            {/* Search */}
+            <div className="max-w-md mx-auto relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                placeholder="Search documentation..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-white/50 dark:bg-gray-900/50 border-orange-200 dark:border-orange-800/30 focus:border-orange-500/70"
+              />
+            </div>
+          </div>
+        </div>
+        
+      </section
+      </section> 
+     
 
       <div className="container mx-auto px-4 py-8">
         {/* Quick Start Section */}
