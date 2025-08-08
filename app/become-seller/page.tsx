@@ -153,15 +153,15 @@ export default function BecomeSellerPage() {
 
   const successStories = [
     {
-      name: "Maria's Organic Farm",
+      name: "Nirali's Organic Farm",
       image: "/placeholder.svg?height=100&width=100",
       revenue: "$50K",
       period: "first 6 months",
       quote:
         "RunAsh transformed my small organic farm into a thriving online business. The live streaming feature helped me connect directly with customers and showcase the quality of my produce.",
       metrics: {
-        viewers: "2.5K",
-        sales: "1,200+",
+        viewers: "2.2K",
+        sales: "1,000+",
         rating: 4.9,
       },
     },
@@ -202,11 +202,11 @@ export default function BecomeSellerPage() {
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
             <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-              Introducing 
+              Introducing Live Sell
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-            AI Live Streaming Selling Platform 
+           AI LiveStream Selling Platform 
           </h1>
           <p className=" text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
             The end-to-end AI live streaming selling platform where you build own live streaming 
@@ -215,7 +215,7 @@ export default function BecomeSellerPage() {
             <Button
               size="lg"
               className="bg-gradient-to-r from-orange-600 to-yellow-500 hover:from-orange-700 hover:to-yellow-600 text-white shadow-lg shadow-orange-500/20 dark:shadow-orange-500/10"
-              onClick={() => router.push("/stream")}
+              onClick={() => router.push("/get-start")}
             >
                Get Started  <Play className="ml-2 h-4 w-4" />
             </Button>
@@ -263,7 +263,7 @@ export default function BecomeSellerPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-yellow-500"></div>
         <div className="relative container mx-auto px-4 text-center text-white">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Become a RunAsh Seller</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Become a Seller</h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
               Transform your organic products business with AI-powered live streaming. Connect with customers worldwide
               and showcase your products like never before.
