@@ -6,6 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import ThemeToggle from "@/components/theme-toggle"
+import StatCounter from "@/components/stat-counter"
+import TechBadge from "@/components/tech-badge"
+import VideoBackground from "@/components/video-background"
 import {
   Users,
   TrendingUp,
@@ -23,8 +27,11 @@ import {
   MessageCircle,
   Eye,
   ThumbsUp,
+  Play,
+  ChevronRight,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+
 
 export default function BecomeSellerPage() {
   const router = useRouter()
@@ -146,15 +153,15 @@ export default function BecomeSellerPage() {
 
   const successStories = [
     {
-      name: "Maria's Organic Farm",
+      name: "Nirali's Organic Farm",
       image: "/placeholder.svg?height=100&width=100",
       revenue: "$50K",
       period: "first 6 months",
       quote:
         "RunAsh transformed my small organic farm into a thriving online business. The live streaming feature helped me connect directly with customers and showcase the quality of my produce.",
       metrics: {
-        viewers: "2.5K",
-        sales: "1,200+",
+        viewers: "2.2K",
+        sales: "1,000+",
         rating: 4.9,
       },
     },
@@ -187,13 +194,76 @@ export default function BecomeSellerPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
+        {/*  <Navbar /> */}
+      {/* Hero Section with Video Background */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
+        <VideoBackground />
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
+            <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
+              Introducing Live Sell
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
+           AI LiveStream Selling Platform 
+          </h1>
+          <p className=" text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
+            The end-to-end AI live streaming selling platform where you build own live streaming 
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-orange-600 to-yellow-500 hover:from-orange-700 hover:to-yellow-600 text-white shadow-lg shadow-orange-500/20 dark:shadow-orange-500/10"
+              onClick={() => router.push("/get-start")}
+            >
+               Get Started  <Play className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-orange-500 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950"
+              onClick={() => router.push("/")}
+            >
+              Learn More <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>     
+         {/* Tech badges */}
+          <div className="mt-12 flex flex-wrap justify-center gap-3">
+            <TechBadge label="Real-time Streaming" />
+            <TechBadge label="Live Streaming Selling" />
+            <TechBadge label="Products Demonstration" />
+            <TechBadge label="Interactive Live Chat" />
+            <TechBadge label="Polls or Q&A sessions" />
+            <TechBadge label="Post-Live Stream" />
+            <TechBadge label="Analytics" />
+          </div>
+        </div>
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+          <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
+        </div>
+      </section> 
+      
+     {/* Stats Section */}
+      <section className="py-16 bg-white dark:bg-gray-900 border-y border-orange-100 dark:border-orange-900/20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <StatCounter value={150} label="100% Organic Certified Products" suffix="+" />
+            <StatCounter value={1000} label="100% Organic Certified Farms" suffix="+" />
+            <StatCounter value={99.9} label="99% Sustainable" suffix="%" />
+            <StatCounter value={100} label="100% Organic Certified Recipe" suffix="+" />
+          </div>
+        </div>
+      </section>
+
+        
+              
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-yellow-500"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-400"></div>
         <div className="relative container mx-auto px-4 text-center text-white">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Become a RunAsh Seller</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Become a Seller</h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
               Transform your organic products business with AI-powered live streaming. Connect with customers worldwide
               and showcase your products like never before.
@@ -219,21 +289,22 @@ export default function BecomeSellerPage() {
           </div>
         </div>
       </section>
+      
 
       {/* Stats Section */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">10K+</div>
+              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">1K+</div>
               <div className="text-gray-600 dark:text-gray-400">Active Sellers</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">$2M+</div>
+              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">$1M+</div>
               <div className="text-gray-600 dark:text-gray-400">Monthly Sales</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">500K+</div>
+              <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">1K+</div>
               <div className="text-gray-600 dark:text-gray-400">Happy Customers</div>
             </div>
             <div>
