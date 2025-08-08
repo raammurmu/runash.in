@@ -6,9 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import VideoBackground from "@/components/video-background"
 import StatCounter from "@/components/stat-counter"
 import TechBadge from "@/components/tech-badge"
+import VideoBackground from "@/components/video-background"
 import {
   Users,
   TrendingUp,
@@ -26,8 +26,11 @@ import {
   MessageCircle,
   Eye,
   ThumbsUp,
+  Play,
+  ChevronRight,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+
 
 export default function BecomeSellerPage() {
   const router = useRouter()
