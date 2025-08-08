@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ThemeToggle } from "@/components/theme-toggle"
+import ThemeToggle from "@/components/theme-toggle"
 import StatCounter from "@/components/stat-counter"
 import TechBadge from "@/components/tech-badge"
 import VideoBackground from "@/components/video-background"
@@ -206,10 +206,10 @@ export default function BecomeSellerPage() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-            RunAsh AI Live Streaming Platform 
+            AI Live Streaming Selling Platform 
           </h1>
           <p className=" text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
-            The next generation of AI live streaming platform for creators, sellers, and businesses 
+            The end-to-end AI live streaming selling platform where you build own live streaming 
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -270,10 +270,10 @@ export default function BecomeSellerPage() {
               <span className="text-orange-600 dark:text-orange-400">Seller</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-              Let's build your own 
+              Let's build live 
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
-              Live streaming 
+              Go live streaming 
             </p>
 
             {/* Search */}
