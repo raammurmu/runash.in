@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
-     <Banner /> 
+  {/* <Banner /> */}
       <Navbar />
        {/* Hero Section with Video Background */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
@@ -1020,10 +1020,10 @@ export default function Home() {
               <div className="flex space-x-6">
                 <a
                   href="/"
-                  className="text-gray-600 gap-1 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
+                  className="text-gray-600 gap-2 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
                   Agent 
-                <Badge varient="secondary" className="bg-green-600 text-green-300 dark:bg-green-600 text-xs">New</Badge>
+                <Badge varient="secondary" className="bg-green-600 text-green-300 dark:bg-green-500 animate-pulse text-xs">New</Badge>
                 </a>
                 <a
                   href="/help"
