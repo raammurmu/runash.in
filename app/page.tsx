@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Banner } from "@/components/banner"
+import Banner from "@/components/banner"
 import { Badge } from "@/components/ui/badge"
 import { Play, Zap, Users, Shield, ArrowRight, ChevronRight, Star, BarChart, Globe,SquareArrowDownRight } from "lucide-react"
 import VideoBackground from "@/components/video-background"
@@ -247,7 +247,7 @@ export default function Home() {
                 quote="The audience analytics have helped me tailor my content to what my viewers actually want. The AI content suggestions are spot on and have helped me grow my channel."
               />
               <TestimonialCard
-                name="Vijay"
+                name="P k Murmu"
                 role="Seller Streamer"
                 image="/placeholder.svg?height=80&width=80"
                 quote="As a seller, audio quality is everything. RunAsh's AI audio enhancement has made my live demonstration sound studio-quality. My fans love it!"
@@ -390,7 +390,7 @@ export default function Home() {
             <div className="lg:col-span-2">
               <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">RunAsh AI</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Runash Digital Innovation Technologies Private Limited.
+               Runash Digital Innovation Technologies Private Limited.
               </p>
               <div className="flex items-center gap-2 mb-4">
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -438,7 +438,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/become-seller"
                     className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                   >
                     Become a seller 
@@ -1020,10 +1020,10 @@ export default function Home() {
               <div className="flex space-x-6">
                 <a
                   href="/"
-                  className="text-gray-600 gap-1 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
+                  className="text-gray-600  dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
                   Agent 
-                <Badge varient="secondary" className="bg-green-600 text-green-300 dark:bg-green-600 text-xs">New</Badge>
+                <Badge varient="secondary" className="bg-green-600 text-white gap-2 space-x-1 dark:bg-green-500 animate-pulse text-xs">New</Badge>
                 </a>
                 <a
                   href="/help"
