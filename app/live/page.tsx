@@ -149,7 +149,7 @@ export default function LivePage() {
   ]
 
   const liveStats = [
-    { label: "Active Streams", value: "1,000", change: "+15%" },
+    { label: "Active Streams", value: "1.0K", change: "+15%" },
     { label: "Total Viewers", value: "2.4M", change: "+23%" },
     { label: "Peak Concurrent", value: "156K", change: "+8%" },
     { label: "Avg Stream Quality", value: "1440p", change: "Stable" },
@@ -158,7 +158,7 @@ export default function LivePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 to-orange-600/10 dark:from-red-600/5 dark:to-orange-600/5" />
@@ -169,7 +169,7 @@ export default function LivePage() {
               LIVE NOW
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-600 to-orange-500 text-transparent bg-clip-text">
-              AI Live Streaming Platform
+              Live Streaming Platform
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Stream to multiple platforms simultaneously with ultra-low latency, 4K quality, and AI-powered
