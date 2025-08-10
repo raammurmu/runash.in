@@ -50,7 +50,7 @@ export default function AIOverviewPage() {
       description: "Advanced NLP for chat moderation and content generation",
       features: ["Sentiment analysis", "Auto-moderation", "Content suggestions", "Multi-language chat"],
       accuracy: 94.2,
-      color: "from-orage-500 to-orange-500",
+      color: "from-orange-500 to-orange-500",
     },
     {
       icon: <BarChart3 className="h-6 w-6" />,
@@ -58,7 +58,7 @@ export default function AIOverviewPage() {
       description: "AI insights for audience engagement and growth",
       features: ["Audience prediction", "Engagement optimization", "Revenue forecasting", "Trend analysis"],
       accuracy: 92.7,
-      color: "from-orange-600 to-oramge-500",
+      color: "from-orange-600 to-orange-500",
     },
   ]
 
@@ -206,7 +206,7 @@ ai.stream.onAudioChunk((audio) => {
                     {spec.icon}
                   </div>
                   <h3 className="font-semibold mb-2">{spec.label}</h3>
-                  <p className="text-2xl font-bold text-orange-600 dark:text-oramge-400">{spec.value}</p>
+                  <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">{spec.value}</p>
                 </CardContent>
               </Card>
             ))}
@@ -327,7 +327,7 @@ ai.stream.onAudioChunk((audio) => {
                   </CardHeader>
                   <CardContent>
                     <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                      <pre className="text-orange-400 text-sm">
+                      <pre className="text-white text-sm">
                         <code>{step.code}</code>
                       </pre>
                     </div>
@@ -358,7 +358,7 @@ ai.stream.onAudioChunk((audio) => {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white/10 bg-transparent"
+              className="border-white text-white hover:bg-white/10 hover:text-white bg-transparent"
               onClick={() => router.push("/contact")}
             >
               Contact Sales
