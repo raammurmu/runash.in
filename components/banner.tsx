@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Github, Menu, X, Bell } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react
+import { useState } from "react"
 
 export default function Banner() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,7 +11,7 @@ export default function Banner() {
 
   return (
       {/* Top Banner */}
-      showBanner && (
+    {showBanner && (
         <div className="bg-gradient-to-r from-orange-600 to-yello-600 text-white py-2 px-4 text-center text-sm relative">
           <div className="flex items-center justify-center space-x-2">
             <Bell className="w-4 h-4" />
@@ -30,5 +30,6 @@ export default function Banner() {
           </button>
         </div>
       )
+    }
     )
 }
