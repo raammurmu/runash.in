@@ -82,7 +82,7 @@ export default function ContactPage() {
                   icon={<Mail className="h-6 w-6 text-white" />}
                   title="Email Us"
                   description="Our team typically responds within 24 hours."
-                  contact="admin@runash.in"
+                  contact="contact@runash.in"
                   gradient="from-orange-500 to-yellow-500 dark:from-orange-400 dark:to-yellow-400"
                 />
                 <ContactMethod
@@ -102,7 +102,7 @@ export default function ContactPage() {
                     <Button
                       size="sm"
                       className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 dark:from-orange-500 dark:to-yellow-500 dark:hover:from-orange-600 dark:hover:to-yellow-600 text-white"
-                    onClick={() => router.push("/chat")}
+                    onClick={() => router.push("/live-chat")}
                     >
                       Start Chat
                     </Button>
@@ -145,17 +145,17 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <OfficeLocation
               city="Bharat (India)"
-              address="310 RunAsh Tech Avenue, Bokaro, JH 827014"
+              address="310 RunAsh AI Corporate Avenue, Bokaro, JH 827014"
               phone="+91 (06542) 253096"
-              email="admin@runash.in"
+              email="contact@runash.in"
               image="/placeholder.svg?height=200&width=400"
               hours="Mon-Fri: 9am-5pm PST"
             />
             <OfficeLocation
               city="Bharat (India)"
-              address=" RunAsh Tech Avenue, Ranchi, JH 834001"
+              address=" RunAsh AI Tech Avenue, Ranchi, JH 834001"
               phone="+91 8987724121"
-              email="admin@runash.in"
+              email="contact@runash.in"
               image="/placeholder.svg?height=200&width=400"
               hours="Mon-Fri: 9am-5pm GMT"
             />
@@ -163,7 +163,7 @@ export default function ContactPage() {
               city="Singapore (Remote)"
               address="New ton Road 307987"
               phone="+91 8987724121 "
-              email="admin@runash.in"
+              email="singapore@runash.in"
               image="/placeholder.svg?height=200&width=400"
               hours="Mon-Fri: 9am-5pm JST"
             />
@@ -171,7 +171,7 @@ export default function ContactPage() {
               city="San Francisco (Remote)"
               address="Stripe Atlas, Dalaware San Francisco, CA "
               phone="+91 8987724121 "
-              email="admin@runash.in"
+              email="sf@runash.in"
               image="/placeholder.svg?height=200&width=400"
               hours="Mon-Fri: 9am-5pm JST"
             />
