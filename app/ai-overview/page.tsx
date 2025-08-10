@@ -162,9 +162,9 @@ ai.stream.onAudioChunk((audio) => {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-sm font-medium mb-6">
               <Brain className="h-4 w-4" />
-              Powered by Advanced AI
+              Powered by RunAsh AI
             </div>
-            <h1 className="inline-block mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-orange-600 to-orange-500 text-transparent bg-clip-text">">
               AI Live Streaming Revolution
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -340,7 +340,7 @@ ai.stream.onAudioChunk((audio) => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-orange-600 to-yellow-500 dark:from-orange-700 dark:to-yellow-600">
+      <section className="py-24 bg-gradient-to-r from-orange-600 to-yellow-500 dark:from-orange-700 dark:to-yellow-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Streams?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
@@ -349,7 +349,7 @@ ai.stream.onAudioChunk((audio) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100"
+              className="bg-white text-orange-600 hover:bg-gray-100"
               onClick={() => router.push("/get-started")}
             >
               Start Free Trial
