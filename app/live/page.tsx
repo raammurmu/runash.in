@@ -18,7 +18,7 @@ export default function LivePage() {
       title: "Ultra-Low Latency Streaming",
       description: "Sub-second latency for real-time interaction with your audience",
       metrics: "< 500ms latency",
-      color: "from-red-500 to-pink-500",
+      color: "from-orange-500 to-orange-500",
     },
     {
       id: "quality",
@@ -168,10 +168,10 @@ export default function LivePage() {
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               LIVE NOW
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-600 to-orange-500 text-transparent bg-clip-text">
-              Live Streaming Platform
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
+              RunAsh Live 
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
               Stream to multiple platforms simultaneously with ultra-low latency, 4K quality, and AI-powered
               enhancements. Built for creators, by creators.
             </p>
@@ -409,7 +409,7 @@ export default function LivePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-orange-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-orange-600 to-yellow-500 text-whit">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Go Live?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
