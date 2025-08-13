@@ -2,8 +2,11 @@ import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
+import AzureADProvider from "next-auth/providers/azure-ad"
+import OktaProvider from "next-auth/providers/okta"
 import { neon } from "@neondatabase/serverless"
 import { compare } from "bcryptjs"
+import { getSSOConfigForDomain, provisionSSOUser, logSSOLoginAttempt } from "./sso"
 
 // Initialize the SQL client
 const sql = neon(process.env.DATABASE_URL!)
@@ -31,6 +34,26 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       allowDangerousEmailAccountLinking: true,
     }),
+    ...(process.env.AZURE_AD_CLIENT_ID && process.env.AZURE_AD_CLIENT_SECRET && process.env.AZURE_AD_TENANT_ID
+      ? [
+          AzureADProvider({
+            clientId: process.env.AZURE_AD_CLIENT_ID,
+            clientSecret: process.env.AZURE_AD_CLIENT_SECRET,
+            tenantId: process.env.AZURE_AD_TENANT_ID,
+            allowDangerousEmailAccountLinking: true,
+          }),
+        ]
+      : []),
+    ...(process.env.OKTA_CLIENT_ID && process.env.OKTA_CLIENT_SECRET && process.env.OKTA_ISSUER
+      ? [
+          OktaProvider({
+            clientId: process.env.OKTA_CLIENT_ID,
+            clientSecret: process.env.OKTA_CLIENT_SECRET,
+            issuer: process.env.OKTA_ISSUER,
+            allowDangerousEmailAccountLinking: true,
+          }),
+        ]
+      : []),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -80,29 +103,79 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id
       }
 
-      // Handle OAuth providers
-      if (account?.provider === "google" || account?.provider === "github") {
+      if (
+        account?.provider &&
+        (account.provider === "google" ||
+          account.provider === "github" ||
+          account.provider === "azure-ad" ||
+          account.provider === "okta")
+      ) {
         try {
+          // Check if this is an SSO login
+          const domain = user.email?.split("@")[1]
+          let ssoConfig = null
+
+          if (domain) {
+            ssoConfig = await getSSOConfigForDomain(domain)
+          }
+
           // Check if user exists in database
           const [existingUser] = await sql`
             SELECT * FROM users WHERE email = ${user.email}
           `
 
           if (!existingUser) {
-            // Create new user
-            const [newUser] = await sql`
-              INSERT INTO users (email, name, avatar_url, provider, provider_id, role)
-              VALUES (${user.email}, ${user.name}, ${user.image}, ${account.provider}, ${account.providerAccountId}, 'user')
-              RETURNING *
-            `
-            token.role = newUser.role
-            token.id = newUser.id
+            if (ssoConfig) {
+              // SSO user provisioning
+              const provisionResult = await provisionSSOUser(
+                user.email!,
+                ssoConfig.organization.id,
+                ssoConfig.provider.id,
+                account.providerAccountId!,
+                {
+                  name: user.name,
+                  image: user.image,
+                  provider: account.provider,
+                },
+              )
+
+              if (provisionResult) {
+                token.role = provisionResult.user.role
+                token.id = provisionResult.user.id
+                token.ssoOrganization = ssoConfig.organization.id
+
+                await logSSOLoginAttempt(ssoConfig.organization.id, ssoConfig.provider.id, true, {
+                  userId: provisionResult.user.id,
+                  externalId: account.providerAccountId,
+                  email: user.email!,
+                })
+              }
+            } else {
+              // Regular OAuth user creation
+              const [newUser] = await sql`
+                INSERT INTO users (email, name, avatar_url, provider, provider_id, role, email_verified)
+                VALUES (${user.email}, ${user.name}, ${user.image}, ${account.provider}, ${account.providerAccountId}, 'user', true)
+                RETURNING *
+              `
+              token.role = newUser.role
+              token.id = newUser.id
+            }
           } else {
             token.role = existingUser.role
             token.id = existingUser.id
+            token.ssoOrganization = existingUser.sso_organization_id
+
+            // Update SSO mapping if this is an SSO login
+            if (ssoConfig && existingUser.is_sso_user) {
+              await logSSOLoginAttempt(ssoConfig.organization.id, ssoConfig.provider.id, true, {
+                userId: existingUser.id,
+                externalId: account.providerAccountId,
+                email: user.email!,
+              })
+            }
           }
         } catch (error) {
-          console.error("Error handling OAuth user:", error)
+          console.error("Error handling OAuth/SSO user:", error)
         }
       }
 
@@ -112,6 +185,7 @@ export const authOptions: NextAuthOptions = {
       if (token) {
         session.user.id = token.id as string
         session.user.role = token.role as string
+        session.user.ssoOrganization = token.ssoOrganization as number
       }
       return session
     },

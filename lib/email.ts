@@ -10,11 +10,26 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+export async function sendEmail(options: {
+  to: string
+  subject: string
+  html: string
+  from?: string
+}) {
+  const mailOptions = {
+    from: options.from || process.env.SMTP_FROM || "noreply@runash.in",
+    to: options.to,
+    subject: options.subject,
+    html: options.html,
+  }
+
+  await transporter.sendMail(mailOptions)
+}
+
 export async function sendVerificationEmail(email: string, name: string, token: string) {
   const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || "noreply@runash.in",
     to: email,
     subject: "Verify your email address",
     html: `
@@ -44,14 +59,13 @@ export async function sendVerificationEmail(email: string, name: string, token: 
     `,
   }
 
-  await transporter.sendMail(mailOptions)
+  await sendEmail(mailOptions)
 }
 
 export async function sendPasswordResetEmail(email: string, name: string, token: string) {
   const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${token}`
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || "noreply@runash.in",
     to: email,
     subject: "Reset your password",
     html: `
@@ -81,5 +95,5 @@ export async function sendPasswordResetEmail(email: string, name: string, token:
     `,
   }
 
-  await transporter.sendMail(mailOptions)
+  await sendEmail(mailOptions)
 }
