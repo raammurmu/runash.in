@@ -12,6 +12,8 @@ import CloudStorageProviderComponent from "@/components/streaming/recording/clou
 import StreamPlayback from "@/components/streaming/recording/stream-playback"
 import ShareDialog from "@/components/streaming/recording/share-dialog"
 import ClipEditor from "@/components/streaming/recording/clip-editor"
+import VideoEditor from "@/components/streaming/recording/video-editor"
+import { RecordingService } from "@/lib/recording-service"
 import type {
   RecordedStream,
   RecordingSettings,
@@ -27,6 +29,7 @@ export default function RecordingsPage() {
   const [isPlaybackOpen, setIsPlaybackOpen] = useState(false)
   const [isShareOpen, setIsShareOpen] = useState(false)
   const [isClipEditorOpen, setIsClipEditorOpen] = useState(false)
+  const [isVideoEditorOpen, setIsVideoEditorOpen] = useState(false)
   const [storageUsage, setStorageUsage] = useState<StorageUsage>({
     used: 0,
     total: 0,
@@ -46,118 +49,27 @@ export default function RecordingsPage() {
     saveChat: true,
     createHighlights: true,
   })
+  const [loading, setLoading] = useState(true)
 
-  // Load mock data
   useEffect(() => {
-    // In a real app, we would fetch this data from an API
-    const mockRecordings: RecordedStream[] = [
-      {
-        id: "rec-1",
-        title: "Weekly Gaming Stream",
-        description: "Playing the latest releases with viewers",
-        thumbnailUrl: "/placeholder.svg?height=720&width=1280",
-        recordingUrl: "https://example.com/recordings/rec-1.mp4",
-        duration: 7200, // 2 hours
-        fileSize: 4.5 * 1024 * 1024 * 1024, // 4.5 GB
-        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
-        platforms: ["twitch", "youtube"],
-        viewCount: 245,
-        downloadCount: 12,
-        isProcessing: false,
-        isPublic: true,
-        tags: ["gaming", "interactive", "multiplayer"],
-        category: "Gaming",
-      },
-      {
-        id: "rec-2",
-        title: "Community Q&A Session",
-        description: "Answering questions from the community about streaming",
-        thumbnailUrl: "/placeholder.svg?height=720&width=1280",
-        recordingUrl: "https://example.com/recordings/rec-2.mp4",
-        duration: 3600, // 1 hour
-        fileSize: 2.2 * 1024 * 1024 * 1024, // 2.2 GB
-        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
-        platforms: ["twitch"],
-        viewCount: 187,
-        downloadCount: 8,
-        isProcessing: false,
-        isPublic: true,
-        tags: ["qa", "community", "discussion"],
-        category: "Just Chatting",
-      },
-      {
-        id: "rec-3",
-        title: "Tutorial: Advanced Streaming Techniques",
-        description: "Learn how to improve your streams with advanced techniques",
-        thumbnailUrl: "/placeholder.svg?height=720&width=1280",
-        recordingUrl: "https://example.com/recordings/rec-3.mp4",
-        duration: 5400, // 1.5 hours
-        fileSize: 3.1 * 1024 * 1024 * 1024, // 3.1 GB
-        createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), // 10 days ago
-        platforms: ["twitch", "youtube", "facebook"],
-        viewCount: 412,
-        downloadCount: 37,
-        isProcessing: false,
-        isPublic: true,
-        tags: ["tutorial", "educational", "streaming"],
-        category: "Education",
-      },
-      {
-        id: "rec-4",
-        title: "New Game First Look",
-        description: "First impressions of the latest game release",
-        thumbnailUrl: "/placeholder.svg?height=720&width=1280",
-        recordingUrl: "https://example.com/recordings/rec-4.mp4",
-        duration: 4500, // 1.25 hours
-        fileSize: 2.8 * 1024 * 1024 * 1024, // 2.8 GB
-        createdAt: new Date().toISOString(), // Today
-        platforms: ["twitch", "youtube"],
-        viewCount: 56,
-        downloadCount: 3,
-        isProcessing: true,
-        isPublic: false,
-        tags: ["gaming", "first-look", "review"],
-        category: "Gaming",
-      },
-    ]
+    const loadData = async () => {
+      try {
+        setLoading(true)
+        const [recordingsData, storageData] = await Promise.all([
+          RecordingService.getRecordings(),
+          RecordingService.getStorageUsage(),
+        ])
 
-    const mockStorageUsage: StorageUsage = {
-      used: 12.6 * 1024 * 1024 * 1024, // 12.6 GB
-      total: 50 * 1024 * 1024 * 1024, // 50 GB
-      recordings: mockRecordings.length,
-      oldestRecordingDate: mockRecordings[mockRecordings.length - 1].createdAt,
+        setRecordings(recordingsData)
+        setStorageUsage(storageData)
+      } catch (error) {
+        console.error("Failed to load recordings:", error)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    const mockCloudProviders: CloudStorageProvider[] = [
-      {
-        id: "google-drive",
-        name: "Google Drive",
-        icon: "/placeholder.svg?height=64&width=64",
-        isConnected: true,
-        usedSpace: 12.6 * 1024 * 1024 * 1024, // 12.6 GB
-        totalSpace: 15 * 1024 * 1024 * 1024, // 15 GB
-      },
-      {
-        id: "dropbox",
-        name: "Dropbox",
-        icon: "/placeholder.svg?height=64&width=64",
-        isConnected: false,
-        usedSpace: 0,
-        totalSpace: 2 * 1024 * 1024 * 1024 * 1024, // 2 TB
-      },
-      {
-        id: "onedrive",
-        name: "OneDrive",
-        icon: "/placeholder.svg?height=64&width=64",
-        isConnected: false,
-        usedSpace: 0,
-        totalSpace: 1 * 1024 * 1024 * 1024 * 1024, // 1 TB
-      },
-    ]
-
-    setRecordings(mockRecordings)
-    setStorageUsage(mockStorageUsage)
-    setCloudProviders(mockCloudProviders)
+    loadData()
   }, [])
 
   const handlePlayRecording = (stream: RecordedStream) => {
@@ -166,17 +78,25 @@ export default function RecordingsPage() {
   }
 
   const handleEditRecording = (stream: RecordedStream) => {
-    // In a real app, this would open an edit dialog
-    console.log("Edit recording", stream)
+    setSelectedStream(stream)
+    setIsVideoEditorOpen(true)
   }
 
-  const handleDeleteRecording = (streamId: string) => {
-    setRecordings((prev) => prev.filter((rec) => rec.id !== streamId))
+  const handleDeleteRecording = async (streamId: string) => {
+    try {
+      await RecordingService.deleteRecording(streamId)
+      setRecordings((prev) => prev.filter((rec) => rec.id !== streamId))
+    } catch (error) {
+      console.error("Failed to delete recording:", error)
+    }
   }
 
-  const handleDownloadRecording = (stream: RecordedStream) => {
-    // In a real app, this would trigger a download
-    console.log("Download recording", stream)
+  const handleDownloadRecording = async (stream: RecordedStream) => {
+    try {
+      await RecordingService.downloadRecording(stream.id)
+    } catch (error) {
+      console.error("Failed to download recording:", error)
+    }
   }
 
   const handleShareRecording = (stream: RecordedStream) => {
@@ -189,13 +109,28 @@ export default function RecordingsPage() {
     setIsClipEditorOpen(true)
   }
 
-  const handleSaveClip = (clip: StreamHighlight) => {
-    // In a real app, this would save the clip to the database
-    console.log("Save clip", clip)
+  const handleSaveClip = async (clip: StreamHighlight) => {
+    try {
+      await RecordingService.createClip(clip)
+      const updatedRecordings = await RecordingService.getRecordings()
+      setRecordings(updatedRecordings)
+    } catch (error) {
+      console.error("Failed to save clip:", error)
+    }
+  }
+
+  const handleSaveEditedVideo = async (editedVideo: any) => {
+    try {
+      await RecordingService.saveEditedVideo(editedVideo)
+      setIsVideoEditorOpen(false)
+      const updatedRecordings = await RecordingService.getRecordings()
+      setRecordings(updatedRecordings)
+    } catch (error) {
+      console.error("Failed to save edited video:", error)
+    }
   }
 
   const handleConnectProvider = (providerId: string) => {
-    // In a real app, this would open an OAuth flow
     setCloudProviders((prev) =>
       prev.map((provider) =>
         provider.id === providerId
@@ -221,9 +156,24 @@ export default function RecordingsPage() {
     )
   }
 
-  const handleSaveSettings = (settings: RecordingSettings) => {
-    setRecordingSettings(settings)
-    // In a real app, this would save the settings to the database
+  const handleSaveSettings = async (settings: RecordingSettings) => {
+    try {
+      await RecordingService.updateSettings(settings)
+      setRecordingSettings(settings)
+    } catch (error) {
+      console.error("Failed to save settings:", error)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p>Loading recordings...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -333,6 +283,15 @@ export default function RecordingsPage() {
           onClose={() => setIsClipEditorOpen(false)}
           onSave={handleSaveClip}
         />
+
+        {selectedStream && (
+          <VideoEditor
+            videoUrl={selectedStream.recordingUrl}
+            isOpen={isVideoEditorOpen}
+            onClose={() => setIsVideoEditorOpen(false)}
+            onSave={handleSaveEditedVideo}
+          />
+        )}
       </div>
     </div>
   )

@@ -14,23 +14,50 @@ import MultiPlatformStreaming from "./multi-platform-streaming"
 import QuickScheduleButton from "./quick-schedule-button"
 import AlertDisplay from "./alerts/alert-display"
 import { useRouter } from "next/navigation"
+import { StreamingService, type StreamData, type StreamMetrics } from "@/lib/streaming-service"
 
 export default function StreamingStudio() {
   const [isStreaming, setIsStreaming] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [streamDuration, setStreamDuration] = useState("00:00:00")
-  const [viewerCount, setViewerCount] = useState(0)
-  const [streamHealth, setStreamHealth] = useState("Excellent")
+  const [currentStream, setCurrentStream] = useState<StreamData | null>(null)
+  const [streamMetrics, setStreamMetrics] = useState<StreamMetrics>({
+    viewerCount: 0,
+    streamHealth: "Excellent",
+    bitrate: 0,
+    fps: 0,
+    droppedFrames: 0,
+    bandwidth: 0,
+  })
   const [activePlatforms, setActivePlatforms] = useState<string[]>([])
   const router = useRouter()
+  const streamingService = StreamingService.getInstance()
+
+  useEffect(() => {
+    const unsubscribeStream = streamingService.onStreamChange((stream) => {
+      setCurrentStream(stream)
+      setIsStreaming(stream?.status === "live")
+    })
+
+    const unsubscribeMetrics = streamingService.onMetricsChange((metrics) => {
+      setStreamMetrics(metrics)
+    })
+
+    return () => {
+      unsubscribeStream()
+      unsubscribeMetrics()
+    }
+  }, [streamingService])
 
   useEffect(() => {
     let interval: NodeJS.Timeout
 
-    if (isStreaming) {
-      let seconds = 0
+    if (isStreaming && currentStream?.startTime) {
       interval = setInterval(() => {
-        seconds++
+        const startTime = new Date(currentStream.startTime!).getTime()
+        const now = Date.now()
+        const seconds = Math.floor((now - startTime) / 1000)
+
         const hours = Math.floor(seconds / 3600)
         const minutes = Math.floor((seconds % 3600) / 60)
         const secs = seconds % 60
@@ -38,51 +65,42 @@ export default function StreamingStudio() {
         setStreamDuration(
           `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`,
         )
-
-        // Simulate viewer count increasing
-        if (seconds % 10 === 0) {
-          setViewerCount((prev) => Math.floor(prev + Math.random() * 5))
-        }
-
-        // Simulate stream health changes
-        if (seconds % 30 === 0) {
-          const healthOptions = ["Excellent", "Good", "Fair", "Poor"]
-          const weights = [0.7, 0.2, 0.07, 0.03] // Weighted probabilities
-
-          const random = Math.random()
-          let cumulativeWeight = 0
-          let selectedHealth = "Excellent"
-
-          for (let i = 0; i < healthOptions.length; i++) {
-            cumulativeWeight += weights[i]
-            if (random <= cumulativeWeight) {
-              selectedHealth = healthOptions[i]
-              break
-            }
-          }
-
-          setStreamHealth(selectedHealth)
-        }
       }, 1000)
     } else {
       setStreamDuration("00:00:00")
-      setViewerCount(0)
     }
 
     return () => {
       if (interval) clearInterval(interval)
     }
-  }, [isStreaming])
+  }, [isStreaming, currentStream])
 
-  const handleToggleStream = () => {
-    setIsStreaming((prev) => !prev)
-    if (!isStreaming) {
-      // Starting stream
-      setActivePlatforms(["twitch"]) // Example platform
-    } else {
-      // Ending stream
-      setIsRecording(false)
-      setActivePlatforms([])
+  const handleToggleStream = async () => {
+    try {
+      if (!isStreaming) {
+        // Starting stream - create new stream if none exists
+        let stream = currentStream
+        if (!stream) {
+          stream = await streamingService.createStream(
+            "Live Stream",
+            "Live streaming session",
+            "twitch", // Default platform
+          )
+        }
+
+        await streamingService.startStream(stream.id)
+        setActivePlatforms(["twitch"]) // Example platform
+      } else {
+        // Ending stream
+        if (currentStream) {
+          await streamingService.stopStream(currentStream.id)
+        }
+        setIsRecording(false)
+        setActivePlatforms([])
+      }
+    } catch (error) {
+      console.error("Failed to toggle stream:", error)
+      // Handle error - show toast notification
     }
   }
 
@@ -119,8 +137,8 @@ export default function StreamingStudio() {
             <StreamStatusBar
               isStreaming={isStreaming}
               streamDuration={streamDuration}
-              viewerCount={viewerCount}
-              streamHealth={streamHealth}
+              viewerCount={streamMetrics.viewerCount}
+              streamHealth={streamMetrics.streamHealth}
               activePlatforms={activePlatforms}
             />
 
@@ -135,7 +153,7 @@ export default function StreamingStudio() {
                 <StreamChat isStreaming={isStreaming} />
               </TabsContent>
               <TabsContent value="analytics" className="mt-4">
-                <StreamAnalytics isStreaming={isStreaming} />
+                <StreamAnalytics isStreaming={isStreaming} metrics={streamMetrics} />
               </TabsContent>
               <TabsContent value="backgrounds" className="mt-4">
                 <VirtualBackgrounds />
