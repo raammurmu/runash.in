@@ -508,13 +508,13 @@ export default function ChangelogPage() {
               placeholder="Enter your email"
               className="bg-white/10 border-white/20 text-white placeholder:text-white/70"
             />
-            <Button className="bg-white border-white text-white hover:bg-white/10 bg-transparent">Subscribe</Button>
+            <Button className="bg-white/10 border-white/20 text-white placeholder:text-white/70 hover:bg-white/10 bg-transparent">Subscribe</Button>
          </div>
            <p className="mt-4 text-sm opacity-75">No spam, unsubscribe at any time</p>
            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="secondary" className="bg-white text-orange-600 hover:bg-gray-100">
-                Learn more 
+                Follow on Hugging Face 
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent">
                 Follow on GitHub
