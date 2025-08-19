@@ -18,6 +18,8 @@ import {
   LogOut,
   Menu,
   X,
+  Contac,
+  Dock,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -78,7 +80,8 @@ export function DashboardNavigation() {
     { href: "/settings", icon: <Settings className="h-4 w-4" />, label: "Settings" },
     { href: "/community", icon: <Users className="h-4 w-4" />, label: "Community" },
     { href: "/support", icon: <HelpCircle className="h-4 w-4" />, label: "Help & Support" },
-    { href: "/Contact", icon: <HelpCircle className="h-4 w-4" />, label: "Contact" },
+    { href: "/Contact", icon: <Contact className="h-4 w-4" />, label: "Contact" },
+    { href: "/Documentation", icon: <Dock className="h-4 w-4" />, label: "Documentation" },
   ]
 
   const closeMobileMenu = () => {
