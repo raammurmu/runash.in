@@ -376,7 +376,7 @@ export default function ChangelogPage() {
           </div>
         </div>
       </section>
-            {/* Changelog Timeline */}
+    {/* Changelog Timeline */}
       <section className="py-24 bg-white dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -590,8 +590,10 @@ export default function ChangelogPage() {
                               </div>
                             ))}
                           </div>
+                          
                         </CardContent>
                       </Card>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -600,6 +602,7 @@ export default function ChangelogPage() {
           </div>
         </div>
         </section>
+    
       
       
 
