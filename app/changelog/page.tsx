@@ -336,9 +336,9 @@ export default function ChangelogPage() {
   )
 
   return (
-    <div className="min-h-full bg-gradient-to-br from-orange-50 via-white to-orange-100 dark:from-gray-950 dark:to-gray-900 dark:to-orange-950/20">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 dark:from-gray-950 dark:to-gray-900 dark:to-orange-950/20">
       {/* Header */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-orange-100 dark:from-gray-950 dark:via-gray-900 dark:to-orange-950/20">
+      <section className="py-16 relative bg-gradient-to-br from-orange-50 via-white to-orange-100 dark:from-gray-950 dark:via-gray-900 dark:to-orange-950/20">
         <div className="container mx-auto px-4 absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-orange-600/10 backdrop-blur-3xl">
           <div className="text-center max-w-3xl mx-auto">
             <div className="relative container mx-auto px-4 py-24 lg:py-32">
@@ -372,6 +372,230 @@ export default function ChangelogPage() {
               </Button>
               </div>
             </div>
+            </div>
+          </div>
+        </div>
+      </section>
+            {/* Changelog Timeline */}
+      <section className="py-24 bg-white dark:bg-gray-950">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-12">
+              {[
+                {
+                  version: "v2.4.0",
+                  date: "January 15, 2025",
+                  type: "major",
+                  title: "Advanced AI Models & Performance Boost",
+                  description:
+                    "Introducing our most powerful AI models yet with 40% faster processing and enhanced accuracy across all tasks.",
+                  changes: [
+                    {
+                      type: "feature",
+                      icon: Sparkles,
+                      title: "New runash-text-pro model with 175B parameters",
+                      description: "Advanced reasoning capabilities for complex tasks",
+                    },
+                    {
+                      type: "improvement",
+                      icon: Zap,
+                      title: "40% faster API response times",
+                      description: "Optimized infrastructure for better performance",
+                    },
+                    {
+                      type: "feature",
+                      icon: Shield,
+                      title: "Enhanced security features",
+                      description: "Advanced encryption and compliance certifications",
+                    },
+                  ],
+                },
+                {
+                  version: "v2.3.2",
+                  date: "December 28, 2024",
+                  type: "minor",
+                  title: "Bug Fixes & Stability Improvements",
+                  description: "Critical bug fixes and performance optimizations based on user feedback.",
+                  changes: [
+                    {
+                      type: "fix",
+                      icon: Bug,
+                      title: "Fixed memory leak in long-running processes",
+                      description: "Resolved issue causing performance degradation",
+                    },
+                    {
+                      type: "improvement",
+                      icon: Zap,
+                      title: "Improved error handling and logging",
+                      description: "Better debugging and monitoring capabilities",
+                    },
+                  ],
+                },
+                {
+                  version: "v2.3.0",
+                  date: "December 10, 2024",
+                  type: "major",
+                  title: "Team Collaboration & Analytics Dashboard",
+                  description:
+                    "New collaboration features and comprehensive analytics to help teams work together more effectively.",
+                  changes: [
+                    {
+                      type: "feature",
+                      icon: Plus,
+                      title: "Team workspaces and project sharing",
+                      description: "Collaborate seamlessly with team members",
+                    },
+                    {
+                      type: "feature",
+                      icon: Sparkles,
+                      title: "Advanced analytics dashboard",
+                      description: "Detailed insights into usage and performance",
+                    },
+                    {
+                      type: "improvement",
+                      icon: Shield,
+                      title: "Enhanced permission management",
+                      description: "Granular control over team access and roles",
+                    },
+                  ],
+                },
+                {
+                  version: "v2.2.1",
+                  date: "November 22, 2024",
+                  type: "patch",
+                  title: "Security Updates & Minor Fixes",
+                  description: "Important security updates and minor bug fixes for improved stability.",
+                  changes: [
+                    {
+                      type: "fix",
+                      icon: Shield,
+                      title: "Security vulnerability patches",
+                      description: "Addressed potential security concerns",
+                    },
+                    {
+                      type: "fix",
+                      icon: Bug,
+                      title: "Fixed API rate limiting edge cases",
+                      description: "Improved handling of concurrent requests",
+                    },
+                  ],
+                },
+                {
+                  version: "v2.2.0",
+                  date: "November 5, 2024",
+                  type: "major",
+                  title: "Multi-Modal AI & Custom Model Training",
+                  description:
+                    "Introducing multi-modal capabilities and the ability to train custom models for specific use cases.",
+                  changes: [
+                    {
+                      type: "feature",
+                      icon: Sparkles,
+                      title: "Multi-modal AI support",
+                      description: "Process text, images, and audio in a single request",
+                    },
+                    {
+                      type: "feature",
+                      icon: Plus,
+                      title: "Custom model training platform",
+                      description: "Train models on your own data for specialized tasks",
+                    },
+                    {
+                      type: "improvement",
+                      icon: Zap,
+                      title: "Improved API documentation",
+                      description: "More comprehensive guides and examples",
+                    },
+                  ],
+                },
+              ].map((release, index) => (
+                <div key={index} className="relative">
+                  {/* Timeline line */}
+                  {index !== 4 && (
+                    <div className="absolute left-6 top-20 w-0.5 h-full bg-gradient-to-b from-orange-500 to-orange-300 dark:from-orange-400 dark:to-orange-600" />
+                  )}
+
+                  <div className="flex items-start space-x-6">
+                    {/* Timeline dot */}
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        release.type === "major"
+                          ? "bg-gradient-to-r from-orange-500 to-orange-600"
+                          : release.type === "minor"
+                            ? "bg-gradient-to-r from-blue-500 to-blue-600"
+                            : "bg-gradient-to-r from-gray-500 to-gray-600"
+                      }`}
+                    >
+                      <GitCommit className="w-6 h-6 text-white" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1">
+                      <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <CardHeader>
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center space-x-3">
+                              <Badge
+                                className={
+                                  release.type === "major"
+                                    ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
+                                    : release.type === "minor"
+                                      ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                                      : "bg-gradient-to-r from-gray-500 to-gray-600 text-white"
+                                }
+                              >
+                                {release.version}
+                              </Badge>
+                              <Badge variant="secondary" className="capitalize">
+                                {release.type} Release
+                              </Badge>
+                            </div>
+                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                              <Calendar className="w-4 h-4 mr-2" />
+                              {release.date}
+                            </div>
+                          </div>
+                          <CardTitle className="text-2xl font-bold">{release.title}</CardTitle>
+                          <CardDescription className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            {release.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            {release.changes.map((change, changeIndex) => (
+                              <div key={changeIndex} className="flex items-start space-x-3">
+                                <div
+                                  className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                                    change.type === "feature"
+                                      ? "bg-green-100 dark:bg-green-900/20"
+                                      : change.type === "improvement"
+                                        ? "bg-blue-100 dark:bg-blue-900/20"
+                                        : "bg-red-100 dark:bg-red-900/20"
+                                  }`}
+                                >
+                                  <change.icon
+                                    className={`w-4 h-4 ${
+                                      change.type === "feature"
+                                        ? "text-green-600 dark:text-green-400"
+                                        : change.type === "improvement"
+                                          ? "text-blue-600 dark:text-blue-400"
+                                          : "text-red-600 dark:text-red-400"
+                                    }`}
+                                  />
+                                </div>
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{change.title}</h4>
+                                  <p className="text-sm text-gray-600 dark:text-gray-300">{change.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
