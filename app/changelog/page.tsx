@@ -507,102 +507,17 @@ export default function ChangelogPage() {
                       description: "More comprehensive guides and examples",
                     },
                   ],
-                },
-              ].map((release, index) => (
-                <div key={index} className="relative">
-                  {/* Timeline line */}
-                  {index !== 4 && (
-                    <div className="absolute left-6 top-20 w-0.5 h-full bg-gradient-to-b from-orange-500 to-orange-300 dark:from-orange-400 dark:to-orange-600" />
-                  )}
-
-                  <div className="flex items-start space-x-6">
-                    {/* Timeline dot */}
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        release.type === "major"
-                          ? "bg-gradient-to-r from-orange-500 to-orange-600"
-                          : release.type === "minor"
-                            ? "bg-gradient-to-r from-blue-500 to-blue-600"
-                            : "bg-gradient-to-r from-gray-500 to-gray-600"
-                      }`}
-                    >
-                      <GitCommit className="w-6 h-6 text-white" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1">
-                      <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                        <CardHeader>
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center space-x-3">
-                              <Badge
-                                className={
-                                  release.type === "major"
-                                    ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
-                                    : release.type === "minor"
-                                      ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                                      : "bg-gradient-to-r from-gray-500 to-gray-600 text-white"
-                                }
-                              >
-                                {release.version}
-                              </Badge>
-                              <Badge variant="secondary" className="capitalize">
-                                {release.type} Release
-                              </Badge>
-                            </div>
-                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              {release.date}
-                            </div>
-                          </div>
-                          <CardTitle className="text-2xl font-bold">{release.title}</CardTitle>
-                          <CardDescription className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                            {release.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-4">
-                            {release.changes.map((change, changeIndex) => (
-                              <div key={changeIndex} className="flex items-start space-x-3">
-                                <div
-                                  className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                                    change.type === "feature"
-                                      ? "bg-green-100 dark:bg-green-900/20"
-                                      : change.type === "improvement"
-                                        ? "bg-blue-100 dark:bg-blue-900/20"
-                                        : "bg-red-100 dark:bg-red-900/20"
-                                  }`}
-                                >
-                                  <change.icon
-                                    className={`w-4 h-4 ${
-                                      change.type === "feature"
-                                        ? "text-green-600 dark:text-green-400"
-                                        : change.type === "improvement"
-                                          ? "text-blue-600 dark:text-blue-400"
-                                          : "text-red-600 dark:text-red-400"
-                                    }`}
-                                  />
-                                </div>
-                                <div className="flex-1">
-                                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{change.title}</h4>
-                                  <p className="text-sm text-gray-600 dark:text-gray-300">{change.description}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                          
-                        </CardContent>
-                      </Card>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                }
+                ]
+              }
+              </div>
             </div>
           </div>
-        </div>
         </section>
-    
+      
+
+                  
+                    
       
       
 
