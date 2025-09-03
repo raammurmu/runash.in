@@ -1,48 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { ContentManager } from "@/lib/content-manager"
-
-export async function GET(req: NextRequest) {
-  try {
-    const session = await getServerSession(authOptions)
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
-    const { searchParams } = new URL(req.url)
-    const action = searchParams.get("action")
-    const folder = searchParams.get("folder")
-    const query = searchParams.get("query")
-
-    const contentManager = ContentManager.getInstance()
-
-    switch (action) {
-      case "list":
-        const content = await contentManager.getUserContent(session.user.id, folder || undefined)
-        return NextResponse.json({ content })
-
-      case "search":
-        if (!query) {
-          return NextResponse.json({ error: "Query parameter required" }, { status: 400 })
-        }
-        const results = await contentManager.searchContent(session.user.id, query, {
-          folder: folder || undefined,
-        })
-        return NextResponse.json({ content: results })
-
-      case "analytics":
-        const analytics = await contentManager.getContentAnalytics(session.user.id)
-        return NextResponse.json(analytics)
-
-      default:
-        return NextResponse.json({ error: "Invalid action" }, { status: 400 })
-    }
-  } catch (error) {
-    console.error("Content API error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
-  }
-}
+import { Database } from "@/lib/database"
 
 export async function POST(req: NextRequest) {
   try {
@@ -51,69 +10,85 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const formData = await req.formData()
-    const action = formData.get("action") as string
+    const contentData = await req.json()
 
-    const contentManager = ContentManager.getInstance()
+    // Create content item
+    const content = await Database.query(
+      `
+      INSERT INTO content_items (
+        user_id, title, description, type, status, visibility,
+        file_url, thumbnail_url, duration, file_size, tags, category
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      RETURNING *
+    `,
+      [
+        session.user.id,
+        contentData.title,
+        contentData.description || null,
+        contentData.type,
+        contentData.status || "draft",
+        contentData.visibility || "private",
+        contentData.file_url || null,
+        contentData.thumbnail_url || null,
+        contentData.duration || null,
+        contentData.file_size || null,
+        contentData.tags || [],
+        contentData.category,
+      ],
+    )
 
-    switch (action) {
-      case "upload":
-        const file = formData.get("file") as File
-        const folder = (formData.get("folder") as string) || ""
-        const tags = JSON.parse((formData.get("tags") as string) || "[]")
-        const isPublic = formData.get("isPublic") === "true"
-
-        if (!file) {
-          return NextResponse.json({ error: "No file provided" }, { status: 400 })
-        }
-
-        const contentItem = await contentManager.uploadContent(file, folder, {
-          userId: session.user.id,
-          tags,
-          isPublic,
-        })
-
-        return NextResponse.json({ content: contentItem })
-
-      case "create-folder":
-        const folderName = formData.get("name") as string
-        const parentPath = (formData.get("parentPath") as string) || ""
-
-        if (!folderName) {
-          return NextResponse.json({ error: "Folder name required" }, { status: 400 })
-        }
-
-        const newFolder = await contentManager.createFolder(folderName, parentPath, session.user.id)
-        return NextResponse.json({ folder: newFolder })
-
-      default:
-        return NextResponse.json({ error: "Invalid action" }, { status: 400 })
-    }
+    return NextResponse.json(content[0])
   } catch (error) {
-    console.error("Content upload error:", error)
+    console.error("Create content error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
 
-export async function DELETE(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    const { searchParams } = new URL(req.url)
+    const type = searchParams.get("type")
+    const status = searchParams.get("status")
+    const category = searchParams.get("category")
+    const limit = Number.parseInt(searchParams.get("limit") || "20")
+    const offset = Number.parseInt(searchParams.get("offset") || "0")
+
+    let whereClause = "WHERE visibility = 'public' AND status = 'published'"
+    const params: any[] = []
+    let paramIndex = 1
+
+    if (type) {
+      whereClause += ` AND type = $${paramIndex}`
+      params.push(type)
+      paramIndex++
     }
 
-    const { contentId } = await req.json()
-
-    if (!contentId) {
-      return NextResponse.json({ error: "Content ID required" }, { status: 400 })
+    if (category) {
+      whereClause += ` AND category = $${paramIndex}`
+      params.push(category)
+      paramIndex++
     }
 
-    const contentManager = ContentManager.getInstance()
-    await contentManager.deleteContent(contentId)
+    const content = await Database.query(
+      `
+      SELECT ci.*, u.name as author_name, u.username as author_username, u.avatar_url as author_avatar
+      FROM content_items ci
+      JOIN users u ON ci.user_id = u.id
+      ${whereClause}
+      ORDER BY ci.created_at DESC
+      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
+    `,
+      [...params, limit, offset],
+    )
 
-    return NextResponse.json({ success: true })
+    const totalResult = await Database.query(`SELECT COUNT(*) as total FROM content_items ci ${whereClause}`, params)
+
+    return NextResponse.json({
+      content,
+      total: Number.parseInt(totalResult[0].total),
+    })
   } catch (error) {
-    console.error("Content delete error:", error)
+    console.error("Get content error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
