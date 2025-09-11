@@ -144,17 +144,17 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <OfficeLocation
-              city="Ranchi | Bokaro"
-              address="RunAsh AI Avenue, Bokaro 827014 | Ranchi, JH 834001"
-              phone="+91 (06542) 253096"
+              city="New Delhi"
+              address="RunAsh AI Avenue, Connaugt Place, 110001"
+              phone="+91 8987724121"
               email="contact@runash.in"
               image="https://ik6onq4zse.ufs.sh/f/Z2es6yU4HjmGo4jzCsrE8Em2aVUNQpXWFrqz7HTyivdPk4bc?height=200&width=400"
               hours="Mon-Fri: 9am-5pm PST"
             />
             <OfficeLocation
-              city="New Delhi"
-              address=" RunAsh AI, Connaugt Place New Delhi, 110001  "
-              phone="+91 8987724121"
+              city="Ranchi | Bokaro"
+              address=" RunAsh AI, Avenue, Bokaro 827014 | Ranchi 834001"
+              phone="+91 (06542) 253096"
               email="contact@runash.in"
               image="https://ik6onq4zse.ufs.sh/f/Z2es6yU4HjmGFUNhkoB1m9HraS0L3yeRkDq2JXWg7npQGKiB?height=200&width=400"
               hours="Mon-Fri: 9am-5pm GMT"
