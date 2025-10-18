@@ -89,9 +89,9 @@ export default function BlogPostPage() {
       <p>The future of digital commerce lies in authentic, interactive experiences that bridge the gap between online and offline shopping. AI-powered live streaming platforms are not just tools; they're catalysts for a more connected, transparent, and engaging marketplace.</p>
     `,
     author: {
-      name: "Sarah Chen",
-      avatar: "/placeholder.svg?height=100&width=100",
-      bio: "Tech journalist and AI enthusiast with over 8 years of experience covering emerging technologies and their impact on business.",
+      name: "Ram Murmu",
+      avatar: "/rammurmu.svg?height=100&width=100",
+      bio: "Tech Lead  and AI researcher enthusiast with over 11 years of experience covering emerging technologies and their impact on business.",
       followers: 12500,
     },
     category: "AI Technology",
@@ -99,10 +99,10 @@ export default function BlogPostPage() {
     publishedAt: "2024-01-15",
     readingTime: 8,
     views: 15420,
-    likes: 342,
-    comments: 28,
+    likes: 4,
+    comments: 4,
     featured: true,
-    image: "/placeholder.svg?height=400&width=800",
+    image: "https://ik6onq4zse.ufs.sh/f/Z2es6yU4HjmGH6b59uE8j3XVPfqwyF91ABSNMCxigK4LzEca?height=400&width=800",
   }
 
   const mockRelatedPosts: BlogPost[] = [
