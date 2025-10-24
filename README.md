@@ -5,11 +5,14 @@
     </a>
     </p>
   <strong>
-    <h1 align="center"></h1>
+    <h1 align="center">RunAsh AI</h1>
   </strong>
+  <p>The real-time video generation modeli and tools</p>
   </div>
+
   
-# RunAsh AI Live Streaming Platform
+  
+## The AI Live Streaming Platform 
 
 ## Introduction
 
