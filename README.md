@@ -7,7 +7,7 @@
   <strong>
     <h1 align="center">RunAsh AI</h1>
   </strong>
-  <p>The real-time video generation modeli and tools</p>
+  <p>The Open-source agentic live commerce for retail automation, real‑time video generation, and multimodal tooling</p>
   </div>
 
   
