@@ -7,7 +7,7 @@ import FeaturesSection from "@/components/features-section"
 import DemoSection from "@/components/demo-section"
 import Footer from "@/components/footer"
 
-export default function Home() {
+export default function AIEditorPage() {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
