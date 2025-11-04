@@ -34,8 +34,8 @@ export default function AIEditorPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      {/* <Header isDark={isDark} onToggleTheme={toggleTheme} />
-      <HeroSection /> */}
+      {/* <Header isDark={isDark} onToggleTheme={toggleTheme} /> */}
+      <HeroSection /> 
       <FeaturesSection />
       <DemoSection />
     {/*  <Footer /> */}
