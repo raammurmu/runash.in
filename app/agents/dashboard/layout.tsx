@@ -2,11 +2,11 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import { SidebarProvider } from "@/components/ui/sidebar"
-import { AuthProvider } from "@/components/auth/auth-provider"
-import { NextAuthSessionProvider } from "@/components/auth/session-provider"
-import { BrandProvider } from "@/components/branding/brand-provider"
+import { ThemeProvider } from "@/components/agents/theme-provider"
+import { SidebarProvider } from "@/components/agents/sidebar"
+import { AuthProvider } from "@/components/agents/auth/auth-provider"
+{/* import { NextAuthSessionProvider } from "@/components/agents/auth/session-provider" */}
+{/* import { BrandProvider } from "@/components/branding/brand-provider" */}
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -24,10 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Single source of truth for providers */}
           <NextAuthSessionProvider>
             <AuthProvider>
-              <BrandProvider>
+              {/*  <BrandProvider> */}
                 {/* Keep shadcn/ui Sidebar context at root for stable usage across pages */}
                 <SidebarProvider defaultOpen={true}>{children}</SidebarProvider>
-              </BrandProvider>
+              {/*  </BrandProvider> */}
             </AuthProvider>
           </NextAuthSessionProvider>
         </ThemeProvider>
