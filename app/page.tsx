@@ -38,7 +38,7 @@ export default function Home() {
        {/* Hero Section with Video Background */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden"> 
         <VideoBackground />
-         <banner />
+         <Banner />
           <div className="bg-gradient-to-r from-orange-600 to-yello-600 text-white py-2 px-4 text-center text-sm relative">
           <div className="flex items-center justify-center space-x-2">
             <Bell className="w-4 h-4" />
