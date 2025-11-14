@@ -2,7 +2,7 @@
 
 import ThemeToggle from "@/components/theme-toggle"
 
-export default function GdprPage() {
+export default function ReturnPolicyPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
       {/* Hero Section */}
