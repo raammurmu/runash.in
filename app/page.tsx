@@ -38,9 +38,9 @@ export default function Home() {
           <div className="inline-block  mt-16 mb-0 px-3 py-3 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
             <div className="flex items-center justify-center space-x-2">
               <Bell className="w-4 h-4" />
-            <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-               🎉 New AI Video Generation Model Released!{" "}
-              <a href="/blog/new-model" className="underline font-semibold hover:text-orange-200">
+              <span className="text-orange-600 dark:text-orange-400 font-medium text-sm">
+               🎉 New Live AI Video Generation Model Pre Released!{" "}
+               <a href="/blog/new-model" className="underline font-semibold hover:text-orange-200">
                 Learn more
               </a>
             </span>
@@ -918,30 +918,30 @@ export default function Home() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">Credit</h4>
+                <h4 className="font-medium text-sm mb-2 text-gray-700 dark:text-gray-300">For</h4>
                 <ul className="space-y-1 text-sm">
                   <li>
                     <a
                       href="mailto:hi@runash.in"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Student 
+                     Students 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/startups"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Startup 
+                     Startups 
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/ambassadors"
                       className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                     >
-                     Ambassador 
+                     Ambassadors 
                     </a>
                   </li>
                   <li>
@@ -1037,7 +1037,7 @@ export default function Home() {
               <ThemeToggle />
               <div className="flex space-x-6">
                 <a
-                  href="/"
+                  href="/chat"
                   className="text-gray-600  dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm"
                 >
                   Agent 
