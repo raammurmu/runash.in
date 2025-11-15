@@ -47,7 +47,7 @@ export default function Home() {
               </a>
             </span>
           </div>
-         </div>
+         
           
         <div className="container relative z-10 mx-auto px-4 text-center">
           <div className="inline-block  mb-4 px-3 py-1 rounded-full bg-orange-100/80 dark:bg-orange-900/30 backdrop-blur-sm border border-orange-200 dark:border-orange-800/50">
@@ -87,6 +87,7 @@ export default function Home() {
             <TechBadge label="Upload & Stream" />
           </div>
         </div>
+         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
           <ChevronRight className="h-8 w-8 transform rotate-90 text-orange-500 dark:text-orange-400" />
         </div>  
@@ -102,6 +103,7 @@ export default function Home() {
             <StatCounter value={2} label="Countries Reached" suffix="+" />
           </div>
         </div>
+      
       </section>
 
       {/* Features Section */}
