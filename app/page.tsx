@@ -29,10 +29,6 @@ export default function Home() {
       return `₹${(price * 83.25).toLocaleString("en-IN")}`
     }
     return `$${price}`
-  
-
-  const [isMenuOpen, setIsMenuOpen] = useState(true)
-  const [showBanner, setShowBanner] = useState(true)
   }
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white">
@@ -49,12 +45,7 @@ export default function Home() {
               </a>
             </span>
           </div>
-            <button
-            onClick={() => setShowBanner(true)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-orange-200"
-          >
-            <X className="w-4 h-4" />
-          </button>
+            
       </div>
       </div>
        {/* Hero Section with Video Background */}
