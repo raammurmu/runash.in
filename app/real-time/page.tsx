@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import PlatformLayout from '@/components/platform-layout'
-import ChatAgentStudio from '@/components/chat-agent-studio'
-import MediaControls from '@/components/media-controls'
-import AICapabilities from '@/components/ai-capabilities'
-import AdvancedSearch from '@/components/advanced-search'
-import UserManagement from '@/components/user-management'
-import SettingsPanel from '@/components/settings-panel'
+import PlatformLayout from '@/components/video/platform-layout'
+import ChatAgentStudio from '@/components/video/chat-agent-studio'
+import MediaControls from '@/components/video/media-controls'
+import AICapabilities from '@/components/video/ai-capabilities'
+import AdvancedSearch from '@/components/video/advanced-search'
+import UserManagement from '@/components/video/user-management'
+import SettingsPanel from '@/components/video/settings-panel'
 
-export default function Home() {
+export default function RealTime() {
   const [activeTab, setActiveTab] = useState('studio')
   const [isDark, setIsDark] = useState(true)
 
