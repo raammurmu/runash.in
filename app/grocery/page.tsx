@@ -25,7 +25,7 @@ function GroceryStoreContent() {
   const [selectedCategory, setSelectedCategory] = useState<GroceryCategory | "all">("all")
   const [filters, setFilters] = useState<Partial<GroceryFilter>>({})
  // 👇 USE Product (from grocery-products.ts) INSTEAD OF GroceryProduct
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<GroceryProduct[]>([])
   
  // const [products, setProducts] = useState<GroceryProduct[]>([])
   const [loading, setLoading] = useState(true)
@@ -168,7 +168,7 @@ function GroceryStoreContent() {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 text-transparent bg-clip-text">
-                    RunAsh Store
+                    RunAsh
                   </h1>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Fresh • Organic </p>
                 </div>
