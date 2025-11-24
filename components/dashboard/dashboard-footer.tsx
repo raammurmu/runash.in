@@ -25,9 +25,11 @@ export function DashboardFooter({ className }: DashboardFooterProps) {
               <span className="font-bold text-lg">RunAsh.AI</span>
             </div>
             <p className="text-sm text-muted-foreground max-w-xs">
-              Empowering creators with AI-powered streaming and analytics tools for the next generation of content
-              creation.
+              Real-time live analytics 
             </p>
+             // Empowering creators with AI-powered streaming and analytics tools for the next generation of content
+              creation.
+            
             <div className="flex space-x-4">
               <Link href="https://github.com" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Github className="h-5 w-5" />
