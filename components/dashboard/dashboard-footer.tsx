@@ -1,8 +1,12 @@
-"use client";
+import { cn } from "@/lib/utils"
+import { Link } from "@nextui-org/react"
+import { Github, Twitter, Linkedin, Mail, Heart } from "lucide-react"
 
-import { Github } from "lucide-react"; // or use shadcn/ui icon
+interface DashboardFooterProps {
+  className?: string
+}
 
-export default function Footer() {
+export function DashboardFooter({ className }: DashboardFooterProps) {
   return (
     <footer className="w-full bg-[#0D1117] text-[#8b949e] py-8 flex flex-col items-center">
       <nav className="flex flex-wrap justify-center gap-x-6 gap-y-1 mb-1 text-xs">
@@ -21,5 +25,5 @@ export default function Footer() {
         <span>© 2025 GitHub, Inc.</span>
       </div>
     </footer>
-  );
+  )
 }
