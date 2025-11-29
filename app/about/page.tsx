@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 export default function AboutPage() {
   const router = useRouter()
 
-  const partners= [
+  const partners = [
     { name: "MIT", href: "https://www.mit.edu", logo: "https://logo.clearbit.com/mit.edu?size=160" },
     { name: "Y Combinator", href: "https://www.ycombinator.com", logo: "https://logo.clearbit.com/ycombinator.com?size=160" },
     { name: "GitHub", href: "https://github.com", logo: "https://logo.clearbit.com/github.com?size=160" },
@@ -335,12 +335,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Supporters Section - Auto Carousel */}
+      {/* Partners Section - Auto Carousel */}
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 dark:from-orange-400 dark:via-orange-300 dark:to-yellow-300 text-transparent bg-clip-text">
-              Backend by 
+              Backend By
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-lg">
               We are proudly backed by a powerhouse collective driving global innovation.
@@ -348,7 +348,6 @@ export default function AboutPage() {
               Development is fueled by the open-source community via GitHub, while cutting-edge AI methodologies stem from our relationship with Hugging Face.
               The entire experience is then seamlessly deployed and scaled using the modern frontend cloud of Vercel.
               This unparalleled support network ensures our commitment to excellence, speed, and open innovation at the intersection of academia, venture, and software development.
-            </p>
             </p>
           </div>
 
@@ -398,7 +397,7 @@ export default function AboutPage() {
                 role="list"
                 // duplicate items for seamless loop
               >
-                {partners.concat(supporters).map((p, i) => (
+                {partners.concat(partners).map((p, i) => (
                   <a
                     key={`${p.name}-${i}`}
                     role="listitem"
@@ -421,7 +420,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       {/* Partners Section */}
       {/* <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
