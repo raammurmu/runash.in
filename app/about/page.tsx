@@ -12,12 +12,12 @@ import { useRouter } from "next/navigation"
 export default function AboutPage() {
   const router = useRouter()
 
-  const supporters = [
-    { name: "MIT", href: "https://www.mit.edu", logo: "image="/mit.svg?size=160" },
-    { name: "Y Combinator", href: "https://www.ycombinator.com", logo: "image="/ycombinator.svg?size=160" },
-    { name: "GitHub", href: "https://github.com", logo: "image="/github.svg?size=160" },
-    { name: "Vercel", href: "https://vercel.com", logo: "image="/vercel.svg?size=160" },
-    { name: "Hugging Face", href: "https://huggingface.co", logo: "image="/huggingface.svg?size=160" },
+  const partners= [
+    { name: "MIT", href: "https://www.mit.edu", logo: "https://logo.clearbit.com/mit.edu?size=160" },
+    { name: "Y Combinator", href: "https://www.ycombinator.com", logo: "https://logo.clearbit.com/ycombinator.com?size=160" },
+    { name: "GitHub", href: "https://github.com", logo: "https://logo.clearbit.com/github.com?size=160" },
+    { name: "Vercel", href: "https://vercel.com", logo: "https://logo.clearbit.com/vercel.com?size=160" },
+    { name: "Hugging Face", href: "https://huggingface.co", logo: "https://logo.clearbit.com/huggingface.co?size=160" },
   ]
   
   return (
@@ -398,22 +398,22 @@ export default function AboutPage() {
                 role="list"
                 // duplicate items for seamless loop
               >
-                {partners.concat(supporters).map((s, i) => (
+                {partners.concat(supporters).map((p, i) => (
                   <a
-                    key={`${s.name}-${i}`}
+                    key={`${p.name}-${i}`}
                     role="listitem"
-                    href={s.href}
+                    href={p.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="carousel-item flex items-center justify-center bg-white dark:bg-gray-900 border border-orange-200 dark:border-orange-800/30 rounded-xl p-6"
                     style={{ minWidth: 220 }}
                   >
                     <img
-                      src={s.logo}
-                      alt={`${s.name} logo`}
+                      src={p.logo}
+                      alt={`${p.name} logo`}
                       className="object-contain"
                     />
-                    <span className="sr-only">{s.name}</span>
+                    <span className="sr-only">{p.name}</span>
                   </a>
                 ))}
               </div>
