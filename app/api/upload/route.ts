@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     // In production, upload to cloud storage (AWS S3, Cloudinary, etc.)
     const fileName = `${Date.now()}-${file.name}`
-    const fileUrl = `/uploads/${fileName}`
+    const fileUrl = `/bucket.runash.in/${fileName}`
 
     return NextResponse.json({
       url: fileUrl,
