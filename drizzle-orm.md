@@ -14,18 +14,18 @@ Phase 2 extends the authentication system with a complete Drizzle ORM implementa
 
 ### 1. Install Dependencies
 
-```bash
+\`\`\`bash
 npm install drizzle-orm @neondatabase/serverless drizzle-kit
-```
+\`\`\`
 
 ### 2. Environment Variables
 
 Verify these are set in your Vercel project:
 
-```
+\`\`\`
 DATABASE_URL=postgresql://...       # Your PostgreSQL connection
 MIGRATION_SECRET=your-secret-key    # For securing admin endpoints
-```
+\`\`\`
 
 ### 3. Generate Drizzle Client
 
@@ -39,10 +39,10 @@ The Drizzle client is automatically created in `lib/drizzle.ts` with:
 There are two approaches:
 
 **Option A: Using Drizzle Kit (Recommended)**
-```bash
+\`\`\`bash
 npx drizzle-kit generate
 npx drizzle-kit migrate
-```
+\`\`\`
 
 **Option B: Via Admin Dashboard**
 1. Go to `/admin/db`
@@ -52,16 +52,16 @@ npx drizzle-kit migrate
 
 ### 5. Seed Sample Data (Optional)
 
-```bash
+\`\`\`bash
 curl -X POST http://localhost:3000/api/db/seed \
   -H "Authorization: Bearer YOUR_MIGRATION_SECRET"
-```
+\`\`\`
 
 Or use the admin dashboard at `/admin/db`
 
 ## File Structure
 
-```
+\`\`\`
 ├── db/
 │   ├── schema.ts                 # Complete database schema
 │   └── migrations/               # Migration files (auto-generated)
@@ -87,7 +87,7 @@ Or use the admin dashboard at `/admin/db`
 │   │       └── seed/route.ts    # Database seeding
 │   └── admin/
 │       └── db/page.tsx          # Admin dashboard
-```
+\`\`\`
 
 ## Database Schema
 
@@ -117,7 +117,7 @@ Or use the admin dashboard at `/admin/db`
 
 ### Server-Side (API Routes, Server Components)
 
-```typescript
+\`\`\`typescript
 import { ProductRepository } from "@/lib/repositories/products"
 
 // Get product
@@ -133,11 +133,11 @@ const newProduct = await ProductRepository.create({
   userId: currentUser.id,
   // ... other fields
 })
-```
+\`\`\`
 
 ### Client-Side (React Components)
 
-```typescript
+\`\`\`typescript
 import { useProducts, useFeaturedProducts } from "@/hooks/use-products"
 import { useOrders } from "@/hooks/use-orders"
 
@@ -152,13 +152,13 @@ export function ProductList() {
     </div>
   )
 }
-```
+\`\`\`
 
 ### Creating API Routes
 
 All database hooks work with `/api/` routes. Example:
 
-```typescript
+\`\`\`typescript
 // app/api/products/route.ts
 import { ProductRepository } from "@/lib/repositories/products"
 
@@ -175,45 +175,45 @@ export async function POST(req: Request) {
   const product = await ProductRepository.create(data)
   return Response.json({ product }, { status: 201 })
 }
-```
+\`\`\`
 
 ## Best Practices
 
 ### 1. Always Use Repositories
 Never query the database directly from components. Use repositories:
-```typescript
+\`\`\`typescript
 // Good
 const product = await ProductRepository.findById(id)
 
 // Avoid
 const product = await db.query.products.findFirst(...)
-```
+\`\`\`
 
 ### 2. Type Safety
 All queries are type-safe through Drizzle:
-```typescript
+\`\`\`typescript
 // TypeScript will catch errors
 const user = await db.query.users.findFirst({
   where: eq(schema.users.email, "user@example.com")
   // IDE autocomplete for all fields
 })
-```
+\`\`\`
 
 ### 3. Use Hooks for Client Components
-```typescript
+\`\`\`typescript
 // In client components, use hooks with SWR
 const { products, isLoading } = useProducts()
-```
+\`\`\`
 
 ### 4. Handle Errors
-```typescript
+\`\`\`typescript
 try {
   const order = await OrderRepository.create(orderData)
 } catch (error) {
   console.error("Failed to create order:", error)
   return Response.json({ error: "Failed to create order" }, { status: 500 })
 }
-```
+\`\`\`
 
 ### 5. Performance
 - Use relationships sparingly (they increase query complexity)
@@ -243,9 +243,9 @@ Once Phase 2 is complete and stable:
 ## Troubleshooting
 
 ### "Module not found" errors
-```
+\`\`\`
 npm install drizzle-orm @neondatabase/serverless drizzle-kit uuid bcryptjs
-```
+\`\`\`
 
 ### Database connection fails
 - Verify `DATABASE_URL` is set correctly
@@ -254,9 +254,9 @@ npm install drizzle-orm @neondatabase/serverless drizzle-kit uuid bcryptjs
 
 ### Missing tables
 Run migrations:
-```bash
+\`\`\`bash
 npx drizzle-kit migrate
-```
+\`\`\`
 
 Or use the admin dashboard to check and create tables manually.
 

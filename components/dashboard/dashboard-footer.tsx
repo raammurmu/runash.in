@@ -47,6 +47,3 @@ export function DashboardFooter({ className }: DashboardFooterProps) {
     </footer>
   )
 }
-
-
-

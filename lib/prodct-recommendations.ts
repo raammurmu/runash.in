@@ -1,4 +1,3 @@
-
 // Product recommendations
 if (input.includes("organic") || input.includes("product") || input.includes("buy")) {
   return {

@@ -7,20 +7,20 @@ Complete implementation guide for migrating to Better Auth with Drizzle ORM and 
 
 ### 1. Install Dependencies
 
-```install
+\`\`\`install
 
 npm install better-auth drizzle-orm @better-auth/drizzle
 npm install -D drizzle-kit @neondatabase/serverless
 npm install bcryptjs
 npm install -D @types/bcryptjs
 
-```
+\`\`\`
 
 ### 2. Environment Variables
 
 Make sure these are set in your `.env.local` or Vercel environment:
 
-```env
+\`\`\`env
 # Better Auth
 BETTER_AUTH_URL=http://localhost:3000  # or your production URL
 BETTER_AUTH_SECRET=<generate-with-openssl-rand-hex-32>
@@ -36,30 +36,30 @@ GITHUB_CLIENT_SECRET=<your-github-client-secret>
 
 # For file uploads/migrations
 MIGRATION_SECRET=<generate-a-secret-token>
-```
+\`\`\`
 
 To generate `BETTER_AUTH_SECRET`:
 
-```bash
+\`\`\`bash
 openssl rand -hex 32
-```
+\`\`\`
 
 ### 3. Generate Database Migrations
 
-```bash
+\`\`\`bash
 # Generate initial migration from schema
 npx drizzle-kit generate
 
 # Run migrations
 npx drizzle-kit migrate
-```
+\`\`\`
 
 ### 4. Initialize Feature Flags
 
-```bash
+\`\`\`bash
 # Run the initialization script
 npx ts-node scripts/init-db.ts
-```
+\`\`\`
 
 This creates the initial feature flags in your database:
 - `use_better_auth`: Controls rollout of Better Auth (0% → 100%)
@@ -67,7 +67,7 @@ This creates the initial feature flags in your database:
 
 ### 5. Deploy to Vercel
 
-```bash
+\`\`\`bash
 # Push changes to GitHub
 git add .
 git commit -m "Phase 1: Better Auth & Drizzle setup"
@@ -75,18 +75,18 @@ git push
 
 # Deploy to Vercel (automatic or via CLI)
 vercel deploy
-```
+\`\`\`
 
 ### 6. Run Database Migrations in Production
 
-```bash
+\`\`\`bash
 curl -X POST https://your-app.vercel.app/api/db/migrate \
   -H "Authorization: Bearer your-migration-secret"
-```
+\`\`\`
 
 ## File Structure
 
-```
+\`\`\`
 app/
 ├── api/
 │   ├── auth/
@@ -128,7 +128,7 @@ scripts/
 ├── init-db.ts                        # Initialize database with flags
 drizzle.config.ts                     # Drizzle configuration
 middleware.ts                         # Next.js middleware
-```
+\`\`\`
 
 ## Key Features Implemented
 
@@ -163,32 +163,32 @@ middleware.ts                         # Next.js middleware
 ## Gradual Migration Strategy
 
 ### Test (0% Rollout)
-```javascript
+\`\`\`javascript
 // Initial flag state
 use_better_auth: isEnabled=true, rolloutPercentage=0
-```
+\`\`\`
 - All new users still use existing auth
 - Internal team tests Better Auth in separate environment
 
 ### Expand (10% Rollout)
-```javascript
+\`\`\`javascript
 use_better_auth: rolloutPercentage=10
-```
+\`\`\`
 - 10% of new users directed to Better Auth
 - Monitor for issues
 - Gather feedback
 
 ### Increase (50% Rollout)
-```javascript
+\`\`\`javascript
 use_better_auth: rolloutPercentage=50
-```
+\`\`\`
 - Half of new users on Better Auth
 - Verify compatibility with all features
 
 ### Complete (100% Rollout)
-```javascript
+\`\`\`javascript
 use_better_auth: rolloutPercentage=100
-```
+\`\`\`
 - All new users on Better Auth
 - Plan migration of existing users
 - Archive NextAuth code
@@ -205,7 +205,7 @@ Navigate to `/admin/flags` (requires admin role):
 ## Testing
 
 ### Test Email/Password Login
-```bash
+\`\`\`bash
 # Signup
 POST /api/auth/sign-up
 {
@@ -222,7 +222,7 @@ POST /api/auth/sign-in/email
 
 # Check Session
 GET /api/auth/session
-```
+\`\`\`
 
 ### Test OAuth Flow
 - Click "Sign in with Google" → redirects to Google → returns with session
@@ -234,7 +234,7 @@ GET /api/auth/session
 - Logout → redirected back to homepage
 
 ### Test Password Reset
-```bash
+\`\`\`bash
 # Request reset
 POST /api/auth/request-password-reset
 { "email": "test@example.com" }
@@ -243,7 +243,7 @@ POST /api/auth/request-password-reset
 # Reset password with token
 POST /api/auth/reset-password
 { "token": "...", "password": "NewPassword123" }
-```
+\`\`\`
 
 ## Common Issues & Solutions
 
@@ -274,24 +274,24 @@ POST /api/auth/reset-password
 ## Monitoring & Debugging
 
 ### Check Current Sessions
-```sql
+\`\`\`sql
 SELECT * FROM sessions WHERE created_at > NOW() - INTERVAL '1 hour';
-```
+\`\`\`
 
 ### Monitor Feature Flag Rollout
-```sql
+\`\`\`sql
 SELECT * FROM auth_feature_flags WHERE flag_name = 'use_better_auth';
-```
+\`\`\`
 
 ### View Verification Tokens
-```sql
+\`\`\`sql
 SELECT * FROM verification_tokens WHERE used = false AND expires_at > NOW();
-```
+\`\`\`
 
 ### Clear Expired Sessions
-```sql
+\`\`\`sql
 DELETE FROM sessions WHERE expires_at < NOW();
-```
+\`\`\`
 
 ## Next Steps
 
