@@ -1,4 +1,5 @@
-# Better Auth & Drizzle ORM Setup Guide
+# Custom RunAsh Auth Integration 
+Better Auth & Drizzle ORM Auth Integration Setup Guide
 
 Complete implementation guide for migrating to Better Auth with Drizzle ORM and feature flags for gradual rollout.
 
