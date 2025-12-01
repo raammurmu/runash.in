@@ -50,6 +50,8 @@
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@react-email/components": "^1.0.1",
+    "@react-email/render": "2.0.0",
     "@remix-run/react": "latest",
     "@simplewebauthn/browser": "latest",
     "@simplewebauthn/server": "latest",
@@ -103,6 +105,7 @@
     "react-resizable-panels": "latest",
     "react-rnd": "latest",
     "recharts": "latest",
+    "resend": "^6.5.2",
     "shiki": "^3.17.0",
     "sonner": "latest",
     "speakeasy": "latest",
@@ -123,6 +126,7 @@
     "zod": "latest"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.28.5",
     "@biomejs/biome": "2.3.8",
     "@serwist/build": "^9.2.3",
     "@types/node": "^22",
