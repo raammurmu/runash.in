@@ -92,14 +92,14 @@ export function DashboardNavigation() {
         <div className="flex flex-col flex-grow border-r bg-card/50 backdrop-blur pt-5 overflow-y-auto">
           <div className="flex items-center justify-between px-4">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center text-white font-bold">
+              <div className="reletive w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center text-white font-bold">
                 {/* Insert logo image */}
                  <Image
-                  src="/RunAsh Logo.png"
-                  alt="RunAsh Logo"
+                  src="/runash-logo.png"
+                  alt="runash-logo"
                   fill
                   className="object-contain p-1"
-                  sizes="40px"
+                  sizes="32px"
                  />
               </div>
               <span className="ml-2 text-xl font-bold bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
@@ -164,14 +164,14 @@ export function DashboardNavigation() {
       {/* Mobile Navigation */}
       <div className="md:hidden flex items-center justify-between p-4 border-b bg-card/50 backdrop-blur">
         <div className="flex items-center">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-white to-gray-50 flex items-center justify-center text-white font-bold">
+          <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-white to-gray-50 flex items-center justify-center text-white font-bold">
               {/* Insert logo image */}
                  <Image
-                  src="/RunAsh Logo.png"
-                  alt="RunAsh Logo"
+                  src="/runash-logo.png"
+                  alt="runash-logo"
                   fill
                   className="object-contain p-1"
-                  sizes="40px"
+                  sizes="32px"
                  />
           </div>
           <span className="ml-2 text-xl font-bold bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
@@ -192,15 +192,8 @@ export function DashboardNavigation() {
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between p-4 border-b">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-white to-gray-50 flex items-center justify-center text-white font-bold">
-                     {/* Insert logo image */}
-                      <Image
-                      src="/RunAsh Logo.png"
-                      alt="RunAsh Logo"
-                      fill
-                      className="object-contain p-1"
-                      sizes="40px"
-                     />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center text-white font-bold">
+                     R
                     </div>
                     <span className="ml-2 text-xl font-bold bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
                       RunAsh
