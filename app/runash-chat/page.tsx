@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Hero from "@/components/home/hero"
-import ProductCarousel from "@/components/home/product-carousel"
+import ProductCarousel from "@/components/home/products-carousel"
 import AgentCard from "@/components/home/agent-card"
 import CTASection from "@/components/home/cta-section"
 import { Card } from "@/components/ui/card"
