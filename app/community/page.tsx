@@ -21,7 +21,7 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import SlideOver from "@/components/slide-over"
+import SlideOver from "@/components/SlideOver"
 import ThemeToggle from "@/components/ThemeToggle"
 import { motion } from "framer-motion"
 
