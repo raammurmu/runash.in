@@ -295,9 +295,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [isHydrated, setIsHydrated] = React.useState(false)
 
-  // Load cart from localStorage on mount
+  // Load cart from localStorage on mount (only on client side after hydration)
   useEffect(() => {
+    setIsHydrated(true)
     const savedCart = localStorage.getItem("runash-cart")
     if (savedCart) {
       try {
@@ -309,10 +311,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to localStorage whenever it changes (only after hydration)
   useEffect(() => {
-    localStorage.setItem("runash-cart", JSON.stringify(state.cart))
-  }, [state.cart])
+    if (isHydrated) {
+      localStorage.setItem("runash-cart", JSON.stringify(state.cart))
+    }
+  }, [state.cart, isHydrated])
 
   const addToCart = (product: Product, quantity = 1) => {
     dispatch({ type: "ADD_ITEM", payload: { product, quantity } })
