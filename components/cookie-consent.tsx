@@ -17,6 +17,7 @@ type ConsentPrefs = {
 
 export function CookieConsent() {
   const [open, setOpen] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
   const [prefs, setPrefs] = useState<ConsentPrefs>({
     essential: true,
     performance: false,
@@ -25,6 +26,7 @@ export function CookieConsent() {
   })
 
   useEffect(() => {
+    setIsHydrated(true)
     const existing = document.cookie
       .split("; ")
       .find((c) => c.startsWith(`${COOKIE_NAME}=`))
