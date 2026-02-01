@@ -8,8 +8,18 @@ import { neon } from "@neondatabase/serverless"
 import { compare } from "bcryptjs"
 import { getSSOConfigForDomain, provisionSSOUser, logSSOLoginAttempt } from "./sso"
 
-// Initialize the SQL client
-const sql = neon(process.env.DATABASE_URL!)
+// Initialize the SQL client lazily to avoid errors during module loading
+let sql: ReturnType<typeof neon> | null = null
+
+function getSQL() {
+  if (!sql) {
+    if (!process.env.DATABASE_URL) {
+      throw new Error("DATABASE_URL environment variable is not set")
+    }
+    sql = neon(process.env.DATABASE_URL)
+  }
+  return sql
+}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -24,16 +34,24 @@ export const authOptions: NextAuthOptions = {
     newUser: "/get-started",
   },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true,
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true,
-    }),
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+      ? [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            allowDangerousEmailAccountLinking: true,
+          }),
+        ]
+      : []),
+    ...(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET
+      ? [
+          GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET,
+            allowDangerousEmailAccountLinking: true,
+          }),
+        ]
+      : []),
     ...(process.env.AZURE_AD_CLIENT_ID && process.env.AZURE_AD_CLIENT_SECRET && process.env.AZURE_AD_TENANT_ID
       ? [
           AzureADProvider({
@@ -67,7 +85,7 @@ export const authOptions: NextAuthOptions = {
 
         try {
           // Find user in database
-          const [user] = await sql`
+          const [user] = await getSQL()`
             SELECT * FROM users WHERE email = ${credentials.email}
           `
 
@@ -120,7 +138,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Check if user exists in database
-          const [existingUser] = await sql`
+          const [existingUser] = await getSQL()`
             SELECT * FROM users WHERE email = ${user.email}
           `
 
@@ -152,7 +170,7 @@ export const authOptions: NextAuthOptions = {
               }
             } else {
               // Regular OAuth user creation
-              const [newUser] = await sql`
+              const [newUser] = await getSQL()`
                 INSERT INTO users (email, name, avatar_url, provider, provider_id, role, email_verified)
                 VALUES (${user.email}, ${user.name}, ${user.image}, ${account.provider}, ${account.providerAccountId}, 'user', true)
                 RETURNING *
